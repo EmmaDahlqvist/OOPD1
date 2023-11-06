@@ -1,3 +1,4 @@
+/*
 interface Speed {
     double speedFactor();
 
@@ -5,3 +6,4 @@ interface Speed {
 
     void decrementSpeed(double amount);
 }
+*/
