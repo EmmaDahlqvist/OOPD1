@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Volvo240 extends Cars {
 
-    public final static double trimFactor = 1.25;
+    private final static double trimFactor = 1.25;
     
     public Volvo240() {
         super(4, 100, Color.black, "Volvo240");
@@ -21,4 +21,18 @@ public class Volvo240 extends Cars {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
+    @Override
+    public void move() {
+
+    }
+
+    @Override
+    public void turnLeft() {
+
+    }
+
+    @Override
+    public void turnRight() {
+
+    }
 }

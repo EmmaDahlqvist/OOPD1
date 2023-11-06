@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Iterator;
 
 public class Saab95 extends Cars {
 
@@ -16,7 +17,7 @@ public class Saab95 extends Cars {
     public void setTurboOff(){
 	    turboOn = false;
     }
-    
+
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
