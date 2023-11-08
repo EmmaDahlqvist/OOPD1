@@ -1,7 +1,6 @@
 import java.awt.*;
-import java.util.Iterator;
 
-public class Saab95 extends Cars implements Movable{
+public class Saab95 extends Car {
 
     public boolean turboOn;
 
@@ -33,41 +32,5 @@ public class Saab95 extends Cars implements Movable{
     }
 
 
-    @Override
-    public void move() {
-        currentX = currentSpeed*dir.get(direction)[0];
-        currentY = currentSpeed*dir.get(direction)[1];
-    }
-
-    @Override
-    public void turnLeft() {
-        if(direction == "N"){
-            direction = "W";
-        } else if(direction == "W"){
-            direction = "S";
-        } else if (direction == "S"){
-            direction = "E";
-        } else if (direction == "E"){
-            direction = "N";
-        }
-        /*if direction[0] == 0:
-        *   if direction[1] == 1:
-        *       direction[0] = -1
-        *   else:
-        *       direction[0] = 1
-        *   direction[1] = 0
-        * else:
-        *   if direction[0] == 1:
-        *       direction[1] = 1
-        *   else:
-        *       direction[1] = -1
-        *   direction[0] = 0
-        */
-    }
-
-    @Override
-    public void turnRight() {
-
-    }
 
 }

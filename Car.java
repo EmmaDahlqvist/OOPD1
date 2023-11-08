@@ -1,9 +1,6 @@
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-//public abstract class Cars implements Speed{
 
-public abstract class Cars {
+public abstract class Car implements Movable{
     private int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
@@ -11,19 +8,18 @@ public abstract class Cars {
     private String modelName; // The car model name
     protected double currentX;
     protected double currentY;
-    protected String direction = "N";
-    protected int[][] directions = {{0, 1}, {1,0}, {-1, 0}, {0, -1}};
-    HashMap<String, int[]> dir = new HashMap<String, int[]>();
 
-    public Cars(int nrDoors, double enginePower, Color color, String modelName) {
+    protected Direction direction;
+
+    public Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
         this.currentX = 0;
         this.currentY = 0;
+        this.direction = Direction.NORTH;
 
-        dir.put("N", new int[]{0,1});
         stopEngine();
     }
 
@@ -60,7 +56,21 @@ public abstract class Cars {
 
     protected abstract void decrementSpeed(double amount);
 
+    @Override
+    public void move() {
+        currentX += currentSpeed*direction.x;
+        currentY += currentSpeed*direction.y;
+    }
 
+    @Override
+    public void turnLeft() {
+        direction = direction.turnLeft();
+    }
+
+    @Override
+    public void turnRight() {
+        direction = direction.turnRight();
+    }
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
