@@ -2,16 +2,15 @@ import java.awt.*;
 
 public abstract class Car implements Movable{
     private int nrDoors; // Number of doors on the car
-    protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
+    private double enginePower; // Engine power of the car
+    private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
     protected double currentX;
     protected double currentY;
-
     protected Direction direction;
 
-    public Car(int nrDoors, double enginePower, Color color, String modelName) {
+    protected Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -23,38 +22,34 @@ public abstract class Car implements Movable{
         stopEngine();
     }
 
-    public int getNrDoors(){
+    protected int getNrDoors(){
         return nrDoors;
     }
-    public double getEnginePower(){
+    protected double getEnginePower(){
         return enginePower;
     }
 
-    public double getCurrentSpeed(){
+    protected double getCurrentSpeed(){
         return currentSpeed;
     }
 
-    public Color getColor(){
+    protected Color getColor(){
         return color;
     }
 
-    public void setColor(Color clr){
+    protected void setColor(Color clr){
         color = clr;
     }
 
-    public void startEngine(){
+    protected void startEngine(){
         currentSpeed = 0.1;
     }
 
-    public void stopEngine(){
+    protected void stopEngine(){
         currentSpeed = 0;
     }
 
     protected abstract double speedFactor();
-
-    protected abstract void incrementSpeed(double amount);
-
-    protected abstract void decrementSpeed(double amount);
 
     @Override
     public void move() {
@@ -72,14 +67,25 @@ public abstract class Car implements Movable{
         direction = direction.turnRight();
     }
 
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
+    protected void incrementSpeed(double amount){
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+    }
+
+    protected void decrementSpeed(double amount){
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
     // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
+    protected void gas(double amount){
+        if(amount >= 0 && amount <= 1){
+            incrementSpeed(amount);
+        }
     }
 
+    // TODO fix this method according to lab pm
+    protected void brake(double amount) {
+        if (amount >= 0 && amount <= 1) {
+            decrementSpeed(amount);
+        }
+    }
 }
