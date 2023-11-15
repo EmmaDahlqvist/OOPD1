@@ -1,6 +1,8 @@
 import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.HashMap;
 
-public abstract class Car implements Movable{
+public class Car implements Movable{
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
@@ -20,6 +22,15 @@ public abstract class Car implements Movable{
         this.direction = Direction.NORTH;
 
         stopEngine();
+    }
+
+
+    protected double getX() {
+        return currentX;
+    }
+
+    protected double getY() {
+        return currentY;
     }
 
     protected int getNrDoors(){
@@ -49,7 +60,9 @@ public abstract class Car implements Movable{
         currentSpeed = 0;
     }
 
-    protected abstract double speedFactor();
+    protected double speedFactor() {
+        return getEnginePower()*0.01;
+    }
 
     @Override
     public void move() {
