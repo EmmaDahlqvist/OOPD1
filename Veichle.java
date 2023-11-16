@@ -6,6 +6,10 @@ public interface Veichle extends Movable {
 
     double getY();
 
+    void setX(double x);
+
+    void setY(double y);
+
     int getNrDoors();
     double getEnginePower();
 

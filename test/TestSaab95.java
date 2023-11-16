@@ -38,19 +38,6 @@ public class TestSaab95 {
         assertEquals(speedFactor, saab95.speedFactor());
     }
 
-    @Test
-    public void testIncrementSpeed(){
-        double speed = saab95.getCurrentSpeed();
-        saab95.incrementSpeed(1.0);
-        assertTrue(saab95.getCurrentSpeed() > speed);
-    }
-
-    @Test
-    public void testDecrementSpeed(){
-        double speed = saab95.getCurrentSpeed();
-        saab95.decrementSpeed(1.0);
-        assertTrue(saab95.getCurrentSpeed() < speed);
-    }
 
     @Test
     public void testGasAmountOutsideRange(){

@@ -1,80 +1,95 @@
 import java.awt.*;
 
-public class Truck implements Movable{
+public class Truck implements Veichle{
 
-    private final Car parent;
-    private boolean platformDown; //platform down = ramp uppe
+    private final VeichleHelper veichleHelper;
+    private boolean platformDownRampUp; //platform down = ramp uppe
     public Truck(int nrOfDoors, double enginePower, Color color, String modelName) {
-        this.parent = new Car(nrOfDoors, enginePower, color, modelName);
-        platformDown = true;
+        veichleHelper = new VeichleHelper(nrOfDoors, enginePower, color, modelName);
+        platformDownRampUp = true;
     }
 
-    protected boolean getPlatformDown(){
-        return platformDown;
+    protected boolean getPlatformDownRampUp(){
+        return platformDownRampUp;
     }
 
-    protected void raisePlatform() {
-        platformDown = false;
+    protected void raisePlatformLowerRamp() {
+        platformDownRampUp = false;
     }
 
-    protected void lowerPlatform() {
-        platformDown = true;
+    protected void lowerPlatformRaiseRamp() {
+        platformDownRampUp = true;
     }
 
-    protected int getNrDoors(){
-        return parent.getNrDoors();
+    public double getX() {
+        return veichleHelper.getX();
     }
 
-    protected double getEnginePower(){
-        return parent.getEnginePower();
+    public double getY() {
+        return veichleHelper.getY();
     }
 
-    protected double getCurrentSpeed(){
-        return parent.getCurrentSpeed();
+    public void setX(double x) {
+        veichleHelper.setX(x);
     }
 
-    protected Color getColor(){
-        return parent.getColor();
+    public void setY(double y) {
+        veichleHelper.setY(y);
     }
 
-    protected void setColor(Color clr){
-        parent.setColor(clr);
+    public int getNrDoors(){
+        return veichleHelper.getNrDoors();
     }
 
-    protected void startEngine(){
-        parent.startEngine();
+    public double getEnginePower(){
+        return veichleHelper.getEnginePower();
     }
 
-    protected void stopEngine(){
-        parent.stopEngine();
+    public double getCurrentSpeed(){
+        return veichleHelper.getCurrentSpeed();
     }
 
-    protected double speedFactor() {
-        return parent.speedFactor();
+    public Color getColor(){
+        return veichleHelper.getColor();
     }
 
-    protected void gas(double amount){
-        parent.gas(amount);
+    public void setColor(Color clr){
+        veichleHelper.setColor(clr);
     }
 
-    protected void brake(double amount) {
-        parent.brake(amount);
+    public void startEngine(){
+        veichleHelper.startEngine();
     }
 
-    @Override
+    public void stopEngine(){
+        veichleHelper.stopEngine();
+    }
+
+    public double speedFactor() {
+        return veichleHelper.speedFactor();
+    }
+
+    public void gas(double amount){
+        veichleHelper.gas(amount);
+    }
+
+    public void brake(double amount) {
+        veichleHelper.brake(amount);
+    }
+
+
     public void move() {
-        if (platformDown) {
-            parent.move();
+        if (platformDownRampUp) {
+            veichleHelper.move();
         }
     }
 
-    @Override
     public void turnLeft() {
-        parent.turnLeft();
+        veichleHelper.turnLeft();
     }
 
-    @Override
+
     public void turnRight() {
-        parent.turnRight();
+        veichleHelper.turnRight();
     }
 }

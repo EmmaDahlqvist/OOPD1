@@ -1,108 +1,52 @@
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class BigRig implements ITruck {
+public class BigRig extends Truck{
 
-    private final VeichleHelper veichleHelper;
-
-    private PlatformHelper platformHelper = new PlatformHelper();
+    List<Car> listOfLoadedCars = new ArrayList<>();
 
     public BigRig(int nrOfDoors, double enginePower, Color color, String modelName) {
-        veichleHelper = new VeichleHelper(nrOfDoors, enginePower, color, modelName);
+        super(nrOfDoors, enginePower, color, modelName);
     }
 
-    protected void LoadCar(Car car){
-//        if();
+    protected void loadCar(Car car){
+        if(!getPlatformDownRampUp()) {
+            double xDistance = Math.abs(getX() - car.getX());
+            double yDistance = Math.abs(getY() - car.getY());
+            if(xDistance <= 3.0 && yDistance <= 3.0) {
+                listOfLoadedCars.add(car);
+                car.loadStatus = true;
+                double truckPosX = getX();
+                double truckPosY = getY();
+                car.setX(truckPosX);
+                car.setY(truckPosY);
+            }
+        }
     }
 
-    @Override
-    public void move() {
-        if(!getPlatformDown()){
-            veichleHelper.move();
+    protected void unloadCar(){ //Ska den ta ett argument egentligen??
+        if(!getPlatformDownRampUp()){
+            Car car = listOfLoadedCars.get(listOfLoadedCars.size() - 1);
+            car.loadStatus = false;
+            listOfLoadedCars.remove(car);
+            car.setX(car.getX() + 3);
+            car.setY(car.getY() + 3);
         }
     }
 
     @Override
-    public void turnLeft() {
-        veichleHelper.turnLeft();
+    public void move(){
+        super.move();
+        for(Car car : listOfLoadedCars){
+            double truckPosX = getX();
+            double truckPosY = getY();
+            car.setX(truckPosX);
+            car.setY(truckPosY);
+        }
     }
 
-    @Override
-    public void turnRight() {
-        veichleHelper.turnRight();
-    }
-
-    @Override
-    public double getX() {
-        return veichleHelper.getX();
-    }
-
-    @Override
-    public double getY() {
-        return veichleHelper.getY();
-    }
-
-    @Override
-    public int getNrDoors() {
-        return veichleHelper.getNrDoors();
-    }
-
-    @Override
-    public double getEnginePower() {
-        return veichleHelper.getEnginePower();
-    }
-
-    @Override
-    public double getCurrentSpeed() {
-        return veichleHelper.getCurrentSpeed();
-    }
-
-    @Override
-    public Color getColor() {
-        return veichleHelper.getColor();
-    }
-
-    @Override
-    public void setColor(Color clr) {
-        veichleHelper.setColor(clr);
-    }
-
-    @Override
-    public void startEngine() {
-        veichleHelper.startEngine();
-    }
-
-    @Override
-    public void stopEngine() {
-        veichleHelper.stopEngine();
-    }
-
-    @Override
-    public double speedFactor() {
-        return veichleHelper.speedFactor();
-    }
-
-    @Override
-    public void gas(double amount) {
-        veichleHelper.gas(amount);
-    }
-
-    @Override
-    public void brake(double amount) {
-        veichleHelper.brake(amount);
-    }
-
-    @Override
-    public boolean getPlatformDown() {
-        return platformHelper.getPlatformDown();
-    }
-
-    @Override
-    public void raisePlatform() {
-        platformHelper.raisePlatform();
-    }
-
-    @Override
-    public void lowerPlatform() {
-        platformHelper.lowerPlatform();
+    public List<Car> getListOfLoadedCars() {
+        return listOfLoadedCars;
     }
 }

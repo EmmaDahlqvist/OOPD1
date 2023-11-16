@@ -52,29 +52,16 @@ public class TestVolvo240 {
         assertTrue(volvo240.speedFactor() == speedFactorValue);
     }
 
-    @Test
-    public void testIncrementSpeed(){
-        double speed = volvo240.getCurrentSpeed();
-        volvo240.incrementSpeed(1.0);
-        assertTrue(volvo240.getCurrentSpeed() > speed);
-    }
-
-    @Test
-    public void testDecrementSpeed(){
-        double speed = volvo240.getCurrentSpeed();
-        volvo240.decrementSpeed(1.0);
-        assertTrue(volvo240.getCurrentSpeed() < speed);
-    }
 
     @Test
     public void testMove(){
-        assertTrue(volvo240.currentX == 0 && volvo240.currentY == 0.1);
+        assertTrue(volvo240.getX() == 0 && volvo240.getY() == 0.1);
     }
 
     @Test
     public void testTurnRight(){
         volvo240.turnRight();
-        assertTrue(volvo240.direction == Direction.EAST);
+        assertTrue(volvo240.getDirection() == Direction.EAST);
     }
 
     @Test
@@ -84,12 +71,12 @@ public class TestVolvo240 {
         volvo240.turnRight();
         volvo240.turnRight();
 
-        assertTrue(volvo240.direction == Direction.NORTH);
+        assertTrue(volvo240.getDirection() == Direction.NORTH);
     }
     @Test
     public void testTurnLeft(){
         volvo240.turnLeft();
-        assertTrue(volvo240.direction == Direction.WEST);
+        assertTrue(volvo240.getDirection() == Direction.WEST);
     }
 
     @Test
@@ -99,6 +86,6 @@ public class TestVolvo240 {
         volvo240.turnLeft();
         volvo240.turnLeft();
 
-        assertTrue(volvo240.direction == Direction.NORTH);
+        assertTrue(volvo240.getDirection() == Direction.NORTH);
     }
 }

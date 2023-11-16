@@ -2,103 +2,91 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 
-public class Car implements Movable{
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private String modelName; // The car model name
-    protected double currentX;
-    protected double currentY;
-    protected Direction direction;
+public class Car implements Veichle {
+
+    private final VeichleHelper veichleHelper;
+
+    public boolean loadStatus = false;
 
     protected Car(int nrDoors, double enginePower, Color color, String modelName) {
-        this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
-        this.color = color;
-        this.modelName = modelName;
-        this.currentX = 0;
-        this.currentY = 0;
-        this.direction = Direction.NORTH;
+        veichleHelper = new VeichleHelper(nrDoors, enginePower, color, modelName);
 
         stopEngine();
     }
 
 
-    protected double getX() {
-        return currentX;
+    public double getX() {
+        return veichleHelper.getX();
     }
 
-    protected double getY() {
-        return currentY;
+    public double getY() {
+        return veichleHelper.getY();
     }
 
-    protected int getNrDoors(){
-        return nrDoors;
-    }
-    protected double getEnginePower(){
-        return enginePower;
+    public void setX(double x){
+        veichleHelper.setX(x);
     }
 
-    protected double getCurrentSpeed(){
-        return currentSpeed;
+    public void setY(double y){
+        veichleHelper.setY(y);
     }
 
-    protected Color getColor(){
-        return color;
+    public Direction getDirection() {
+        return veichleHelper.direction;
     }
 
-    protected void setColor(Color clr){
-        color = clr;
+    public int getNrDoors(){
+        return veichleHelper.getNrDoors();
     }
 
-    protected void startEngine(){
-        currentSpeed = 0.1;
+    public double getEnginePower(){
+        return veichleHelper.getEnginePower();
     }
 
-    protected void stopEngine(){
-        currentSpeed = 0;
+    public double getCurrentSpeed(){
+        return veichleHelper.getCurrentSpeed();
     }
 
-    protected double speedFactor() {
-        return getEnginePower()*0.01;
+    public Color getColor(){
+        return veichleHelper.getColor();
     }
 
-    @Override
+    public void setColor(Color clr){
+        veichleHelper.setColor(clr);
+    }
+
+    public void startEngine(){
+        veichleHelper.startEngine();
+    }
+
+    public void stopEngine(){
+        veichleHelper.stopEngine();
+    }
+
+    public double speedFactor() {
+        return veichleHelper.speedFactor();
+    }
+
     public void move() {
-        currentX += currentSpeed*direction.x;
-        currentY += currentSpeed*direction.y;
+        if(!loadStatus){
+            veichleHelper.move();
+        }
     }
 
-    @Override
     public void turnLeft() {
-        direction = direction.turnLeft();
+        veichleHelper.turnLeft();
     }
 
-    @Override
+
     public void turnRight() {
-        direction = direction.turnRight();
+        veichleHelper.turnRight();
     }
 
-    protected void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+    public void gas(double amount){
+        veichleHelper.gas(amount);
     }
 
-    protected void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-    }
-
-    // TODO fix this method according to lab pm
-    protected void gas(double amount){
-        if(amount >= 0 && amount <= 1){
-            incrementSpeed(amount);
-        }
-    }
-
-    // TODO fix this method according to lab pm
-    protected void brake(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            decrementSpeed(amount);
-        }
+    public void brake(double amount) {
+        veichleHelper.gas(amount);
     }
 }

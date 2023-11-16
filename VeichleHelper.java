@@ -31,6 +31,18 @@ public class VeichleHelper {
         return currentY;
     }
 
+    protected void setX(double x) {
+        currentX = x;
+    }
+
+    protected void setY(double y) {
+         currentY = y;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
     protected int getNrDoors(){
         return nrDoors;
     }

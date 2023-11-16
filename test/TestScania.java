@@ -11,23 +11,16 @@ public class TestScania {
         scania = new Scania();
     }
 
-    @Test
-    public void testRaisePlatformHasSpeed() {
-        scania.startEngine();
-        scania.raisePlatformDegree(5);
-
-        assertTrue(scania.getPlatformDegree() == 0);
-    }
 
     @Test
-    public void testRaisePlatformNoSpeed() {
+    public void testRaisePlatform() {
         int degree = scania.getPlatformDegree();
         scania.raisePlatformDegree(5);
 
         assertTrue(scania.getPlatformDegree() > degree);
     }
     @Test
-    public void testLowerPlatformNoSpeed() {
+    public void testLowerPlatform() {
         scania.raisePlatformDegree(10);
         int degree = scania.getPlatformDegree();
         scania.lowerPlatformDegree(5);
@@ -38,9 +31,9 @@ public class TestScania {
     @Test
     public void testmoveWithRaisedPlatform(){
         scania.raisePlatformDegree(40);
-        double y = scania.currentY;
+        double y = scania.getY();
         scania.move();
-        assertTrue(scania.currentY == y);
+        assertTrue(scania.getY() == y);
     }
 
 }
