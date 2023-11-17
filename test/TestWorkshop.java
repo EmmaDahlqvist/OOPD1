@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 public class TestWorkshop {
 
-    private Workshop<Car> carWorkshop = new Workshop<>();
-    private Workshop<Saab95> saabWorkshop = new Workshop<>();
+    private Workshop<Car> carWorkshop = new Workshop<>(3);
+    private Workshop<Saab95> saabWorkshop = new Workshop<>(4);
     Car saab95 = new Saab95();
     Truck scania = new Scania();
 

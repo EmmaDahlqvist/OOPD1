@@ -4,14 +4,11 @@ import java.util.List;
 
 public class BigRig extends Truck{
 
-    private List<Car> listOfLoadedCars = new ArrayList<>();
-
-    private int capacity;
+    LoadHelper<Car> loadHelper;
 
     public BigRig(int nrOfDoors, double enginePower, Color color, String modelName, int capacity) {
         super(nrOfDoors, enginePower, color, modelName);
-
-        this.capacity = capacity;
+        loadHelper = new LoadHelper<>(capacity);
     }
 
     protected void loadCar(Car car){
@@ -19,7 +16,7 @@ public class BigRig extends Truck{
             double xDistance = Math.abs(getX() - car.getX());
             double yDistance = Math.abs(getY() - car.getY());
             if(xDistance <= 3.0 && yDistance <= 3.0) {
-                listOfLoadedCars.add(car);
+                loadHelper.load(car);
                 car.loadStatus = true;
                 double truckPosX = getX();
                 double truckPosY = getY();
@@ -29,11 +26,11 @@ public class BigRig extends Truck{
         }
     }
 
-    protected void unloadCar(){ //Ska den ta ett argument egentligen??
-        if(!getPlatformDownRampUp()){
-            Car car = listOfLoadedCars.get(listOfLoadedCars.size() - 1);
+    protected void unloadCar(){
+        if(!getPlatformDownRampUp() && !loadHelper.getListOfLoadedCars().isEmpty()){
+            Car car = loadHelper.getListOfLoadedCars().get(loadHelper.getListOfLoadedCars().size() - 1);
             car.loadStatus = false;
-            listOfLoadedCars.remove(car);
+            loadHelper.unload(car);
             car.setX(car.getX() + 3);
             car.setY(car.getY() + 3);
         }
@@ -42,7 +39,7 @@ public class BigRig extends Truck{
     @Override
     public void move(){
         super.move();
-        for(Car car : listOfLoadedCars){
+        for(Car car : loadHelper.getListOfLoadedCars()){
             double truckPosX = getX();
             double truckPosY = getY();
             car.setX(truckPosX);
@@ -51,6 +48,6 @@ public class BigRig extends Truck{
     }
 
     public List<Car> getListOfLoadedCars() {
-        return listOfLoadedCars;
+        return loadHelper.getListOfLoadedCars();
     }
 }

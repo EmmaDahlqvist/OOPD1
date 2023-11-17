@@ -1,27 +1,22 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Workshop <T extends Veichle> {
 
-    private List<T> listOfLoadedCars = new ArrayList<>();
+    LoadHelper<T> loadHelper;
 
+    public Workshop(int capacity) {
+        loadHelper = new LoadHelper<>(capacity);
+    }
 
     protected void load(T car){
-        if(!listOfLoadedCars.contains(car)){
-            listOfLoadedCars.add(car);
-        }
+        loadHelper.load(car);
     }
 
-    protected T unload(T car){
-        if(listOfLoadedCars.contains(car)){
-            listOfLoadedCars.remove(car);
-            return car;
-        }
-        return null;
+    protected void unload(T car){
+        loadHelper.unload(car);
     }
-
 
     protected List<T> getListOfLoadedCars() {
-        return listOfLoadedCars;
+        return loadHelper.getListOfLoadedCars();
     }
 }
