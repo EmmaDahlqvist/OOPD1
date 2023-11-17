@@ -4,14 +4,18 @@ import java.util.List;
 
 public class BigRig extends Truck{
 
-    List<Car> listOfLoadedCars = new ArrayList<>();
+    private List<Car> listOfLoadedCars = new ArrayList<>();
 
-    public BigRig(int nrOfDoors, double enginePower, Color color, String modelName) {
+    private int capacity;
+
+    public BigRig(int nrOfDoors, double enginePower, Color color, String modelName, int capacity) {
         super(nrOfDoors, enginePower, color, modelName);
+
+        this.capacity = capacity;
     }
 
     protected void loadCar(Car car){
-        if(!getPlatformDownRampUp()) {
+        if(!getPlatformDownRampUp() && listOfLoadedCars.size() <= capacity ) {
             double xDistance = Math.abs(getX() - car.getX());
             double yDistance = Math.abs(getY() - car.getY());
             if(xDistance <= 3.0 && yDistance <= 3.0) {

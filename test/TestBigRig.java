@@ -14,7 +14,7 @@ public class TestBigRig {
 
     @Before
     public void init() {
-        bigRig = new BigRig(2, 350, Color.black, "BiggestRig");
+        bigRig = new BigRig(2, 350, Color.black, "BiggestRig", 1);
         car = new Volvo240();
 
         bigRig.setX(1); //den har flyttats
@@ -46,6 +46,14 @@ public class TestBigRig {
         bigRig.unloadCar();
 
         assertFalse(bigRig.getListOfLoadedCars().contains(car));
+    }
 
+    @Test
+    public void testLoadingMoreThanCapacity() {
+        Car car2 = new Car(2, 300, Color.cyan, "Emma's bil");
+
+        bigRig.loadCar(car2);
+
+        assertTrue(bigRig.getListOfLoadedCars().contains(car2));
     }
 }
