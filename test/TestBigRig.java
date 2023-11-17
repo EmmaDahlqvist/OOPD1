@@ -11,11 +11,13 @@ public class TestBigRig {
 
     private BigRig bigRig;
     private Car car;
+    private Car car2;
 
     @Before
     public void init() {
         bigRig = new BigRig(2, 350, Color.black, "BiggestRig", 1);
         car = new Volvo240();
+        car2 = new Saab95();
 
         bigRig.setX(1); //den har flyttats
         bigRig.raisePlatformLowerRamp();
@@ -43,14 +45,14 @@ public class TestBigRig {
     @Test
     public void testUnloadingCarFromBigRig() {
         bigRig.raisePlatformLowerRamp();
+        bigRig.loadCar(car2);
         bigRig.unloadCar();
 
-        assertFalse(bigRig.getListOfLoadedCars().contains(car));
+        assertTrue(bigRig.getListOfLoadedCars().contains(car) && !bigRig.getListOfLoadedCars().contains(car2));
     }
 
     @Test
     public void testLoadingMoreThanCapacity() {
-        Car car2 = new Car(2, 300, Color.cyan, "Emma's bil");
 
         bigRig.loadCar(car2);
 
