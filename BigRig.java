@@ -15,7 +15,7 @@ public class BigRig extends Truck{
     }
 
     protected void loadCar(Car car){
-        if(!getPlatformDownRampUp() && listOfLoadedCars.size() <= capacity ) {
+        if(!getPlatformDownRampUp()) {
             double xDistance = Math.abs(getX() - car.getX());
             double yDistance = Math.abs(getY() - car.getY());
             if(xDistance <= 3.0 && yDistance <= 3.0) {
