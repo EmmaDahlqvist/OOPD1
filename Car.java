@@ -87,6 +87,6 @@ public class Car implements Veichle {
     }
 
     public void brake(double amount) {
-        veichleHelper.gas(amount);
+        veichleHelper.brake(amount);
     }
 }
