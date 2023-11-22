@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -21,26 +24,13 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Veichle> cars = new ArrayList<>();
+   // ArrayList<Veichle> cars = new ArrayList<>();
+    HashMap<Veichle, BufferedImage> cars = new HashMap<>();
+    Collection<DrawingComponent> drawingComponents = new ArrayList<>();
 
     //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        Car saab = new Saab95();
-        saab.setY(100);
-
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Scania());
-        cc.cars.add(saab);
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
+    public Timer getTimer() {
+        return timer;
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -48,13 +38,12 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Veichle car : cars) {
+            for (Veichle car : cars.keySet()) {
                 if(car.getX() <= 0 || car.getX() >= 800-110){ //800 bredd - bilens bredd ish + bugg
                     car.bounceDirection();
                 }
 
                 car.move();
-                System.out.println(car.getClass());
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y);
@@ -67,14 +56,14 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Veichle car : cars) {
+        for (Veichle car : cars.keySet()) {
             car.gas(gas);
         }
     }
 
     void brake(int amount ){
         double brake = ((double ) amount ) / 100;
-        for(Veichle car: cars) {
+        for(Veichle car: cars.keySet()) {
             car.brake(brake);
         }
     }

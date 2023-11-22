@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -15,11 +16,11 @@ public class DrawPanel extends JPanel{
     BufferedImage volvoImage;
     BufferedImage saabImage;
     BufferedImage scaniaImage;
+
     // To keep track of a singel cars position
-
-    Collection<DrawingComponent> drawingComponents = new ArrayList<DrawingComponent>();
-
     Point carPoint = new Point();
+
+    HashMap<Veichle, BufferedImage> cars;
 
     // TODO: Make this genereal for all cars
     void moveit(int x, int y) {
@@ -28,7 +29,8 @@ public class DrawPanel extends JPanel{
     }
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y, HashMap<Veichle, BufferedImage> cars) {
+        this.cars = cars;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.pink);
@@ -40,7 +42,6 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            drawingComponents.add(new DrawingComponent(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"))));
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
             saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
             scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
@@ -58,14 +59,17 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (counter < 19) {
-            g.drawImage(volvoImage, 30, 100, null); // see javadoc for more info on the parameters
-            g.drawImage(scaniaImage, 0, 0, null);
-            g.drawImage(saabImage, 0, 200, null);
-        } else {
-            g.drawImage(volvoImage, 30, 100, null); // see javadoc for more info on the parameters
-            g.drawImage(scaniaImage, 0, 0, null);
+        for(Veichle car: cars.keySet()){
+            g.drawImage(cars.get(car), (int) car.getX(), (int) car.getY(), null);
         }
+//        if (counter < 19) {
+//            g.drawImage(volvoImage, 1, 100, null); // see javadoc for more info on the parameters
+//            g.drawImage(scaniaImage, 0, 0, null);
+//            g.drawImage(saabImage, 0, 200, null);
+//        } else {
+//            g.drawImage(volvoImage, 30, 100, null); // see javadoc for more info on the parameters
+//            g.drawImage(scaniaImage, 0, 0, null);
+//        }
 
         counter++;
 
