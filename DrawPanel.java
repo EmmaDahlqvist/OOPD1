@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -11,13 +13,18 @@ public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
+    BufferedImage saabImage;
+    BufferedImage scaniaImage;
     // To keep track of a singel cars position
-    Point volvoPoint = new Point();
+
+    Collection<DrawingComponent> drawingComponents = new ArrayList<DrawingComponent>();
+
+    Point carPoint = new Point();
 
     // TODO: Make this genereal for all cars
-    void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+    void moveit(int x, int y) {
+        carPoint.x = x;
+        carPoint.y = y;
     }
 
     // Initializes the panel and reads the images
@@ -33,7 +40,10 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
+            drawingComponents.add(new DrawingComponent(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"))));
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
         } catch (IOException ex)
         {
             ex.printStackTrace();
@@ -41,11 +51,24 @@ public class DrawPanel extends JPanel{
 
     }
 
+    int counter = 0;
+
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
+        if (counter < 19) {
+            g.drawImage(volvoImage, 30, 100, null); // see javadoc for more info on the parameters
+            g.drawImage(scaniaImage, 0, 0, null);
+            g.drawImage(saabImage, 0, 200, null);
+        } else {
+            g.drawImage(volvoImage, 30, 100, null); // see javadoc for more info on the parameters
+            g.drawImage(scaniaImage, 0, 0, null);
+        }
+
+        counter++;
+
+
     }
 }

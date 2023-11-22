@@ -8,6 +8,9 @@ public class Truck implements Veichle{
         veichleHelper = new VeichleHelper(nrOfDoors, enginePower, color, modelName);
         platformDownRampUp = true;
     }
+    public void bounceDirection() {
+        veichleHelper.bounceDirection();
+    }
 
     protected boolean getPlatformDownRampUp(){
         return platformDownRampUp;

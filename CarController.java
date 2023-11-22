@@ -29,7 +29,12 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
+        Car saab = new Saab95();
+        saab.setY(100);
+
         cc.cars.add(new Volvo240());
+        cc.cars.add(new Scania());
+        cc.cars.add(saab);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -44,7 +49,12 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Veichle car : cars) {
+                if(car.getX() <= 0 || car.getX() >= 800-110){ //800 bredd - bilens bredd ish + bugg
+                    car.bounceDirection();
+                }
+
                 car.move();
+                System.out.println(car.getClass());
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y);
@@ -63,9 +73,9 @@ public class CarController {
     }
 
     void brake(int amount ){
-        double gas = ((double ) amount ) / 100;
+        double brake = ((double ) amount ) / 100;
         for(Veichle car: cars) {
-            car.brake(amount);
+            car.brake(brake);
         }
     }
 }

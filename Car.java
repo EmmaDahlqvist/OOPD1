@@ -14,6 +14,10 @@ public class Car implements Veichle {
         stopEngine();
     }
 
+    public void bounceDirection() {
+        veichleHelper.bounceDirection();
+    }
+
 
     public double getX() {
         return veichleHelper.getX();

@@ -5,6 +5,7 @@ import java.util.List;
 public class BigRig extends Truck{
 
     LoadHelper<Car> loadHelper;
+    private final int distanceFromBigRig = 3;
 
     public BigRig(int nrOfDoors, double enginePower, Color color, String modelName, int capacity) {
         super(nrOfDoors, enginePower, color, modelName);
@@ -15,7 +16,7 @@ public class BigRig extends Truck{
         if(!getPlatformDownRampUp()) {
             double xDistance = Math.abs(getX() - car.getX());
             double yDistance = Math.abs(getY() - car.getY());
-            if(xDistance <= 3.0 && yDistance <= 3.0) {
+            if(xDistance <= distanceFromBigRig && yDistance <= distanceFromBigRig) {
                 loadHelper.load(car);
                 car.loadStatus = true;
                 double truckPosX = getX();
@@ -31,8 +32,8 @@ public class BigRig extends Truck{
             Car car = loadHelper.getListOfLoadedCars().get(loadHelper.getListOfLoadedCars().size() - 1);
             car.loadStatus = false;
             loadHelper.unload(car);
-            car.setX(car.getX() + 3);
-            car.setY(car.getY() + 3);
+            car.setX(car.getX() + distanceFromBigRig);
+            car.setY(car.getY() + distanceFromBigRig);
         }
     }
 

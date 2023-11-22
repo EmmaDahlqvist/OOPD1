@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
+    private static final int X = 800; //möjligtvis lägga till en helper till programfönstret..?
     private static final int Y = 800;
 
     // The controller member
@@ -27,7 +27,6 @@ public class CarView extends JFrame{
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
-    int brakeAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
     JButton gasButton = new JButton("Gas");
@@ -55,7 +54,6 @@ public class CarView extends JFrame{
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
 
 
         SpinnerModel spinnerModel =
@@ -112,8 +110,7 @@ public class CarView extends JFrame{
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                brakeAmount += 1;
-                carC.brake(brakeAmount); //FORTSÄTT HÄR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                carC.brake(gasAmount);
             }
         });
 

@@ -2,6 +2,8 @@ import java.awt.*;
 
 public interface Veichle extends Movable {
 
+    void bounceDirection();
+
     double getX();
 
     double getY();

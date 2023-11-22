@@ -17,9 +17,14 @@ public class VeichleHelper {
         this.modelName = modelName;
         this.currentX = 0;
         this.currentY = 0;
-        this.direction = Direction.NORTH;
+        this.direction = Direction.EAST;
 
         stopEngine();
+    }
+
+    protected void bounceDirection(){
+        turnRight();
+        turnRight();
     }
 
 
