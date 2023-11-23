@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,9 +23,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-   // ArrayList<Veichle> cars = new ArrayList<>();
-    HashMap<Veichle, BufferedImage> cars = new HashMap<>();
-    Collection<DrawingComponent> drawingComponents = new ArrayList<>();
+    HashMap<Veichle, String> cars = new HashMap<>();
 
     //methods:
     public Timer getTimer() {
@@ -39,32 +36,83 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Veichle car : cars.keySet()) {
-                if(car.getX() <= 0 || car.getX() >= 800-110){ //800 bredd - bilens bredd ish + bugg
-                    car.bounceDirection();
+                if(car.getX() <= -1 || car.getX() >= 682) { //800 bredd - bilens bredd ish + bugg
+                    bounceDirection(car);
                 }
 
                 car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(x, y);
+
+
+//                car.move();
+//                int x = (int) Math.round(car.getX());
+//                int y = (int) Math.round(car.getY());
+//                frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
         }
     }
 
+    public void initCarPositions(HashMap<Veichle, String> cars){
+        int y = 0;
+        for(Veichle car : cars.keySet()){
+            car.setY(y);
+            y += 100;
+        }
+    }
+
+    private void bounceDirection(Veichle car){
+        car.turnRight();
+        car.turnRight();
+    }
+
     // Calls the gas method for each car once
-    void gas(int amount) {
+    protected void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Veichle car : cars.keySet()) {
             car.gas(gas);
         }
     }
 
-    void brake(int amount ){
+    protected void brake(int amount ){
         double brake = ((double ) amount ) / 100;
         for(Veichle car: cars.keySet()) {
             car.brake(brake);
         }
     }
+
+    protected void setTurboOn(){
+        for(Veichle car: cars.keySet()) {
+            if(car instanceof Saab95){
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+
+    protected void setTurboOff(){
+        for(Veichle car: cars.keySet()) {
+            if(car instanceof Saab95){
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+
+    protected void liftBed(){
+        for(Veichle car: cars.keySet()) {
+            if(car instanceof Scania){
+                ((Scania) car).raisePlatformDegree(70);
+            }
+        }
+
+    }
+
+    protected void lowerBed(){
+        for(Veichle car: cars.keySet()) {
+            if(car instanceof Scania){
+                ((Scania) car).lowerPlatformDegree(70);
+            }
+        }
+
+    }
+
 }

@@ -14,6 +14,7 @@ public class Scania extends Truck {
     }
 
     protected void raisePlatformDegree(int degree){
+        System.out.println("raiseplatform");
         raisePlatformLowerRamp();
         if (degree >= 0 && platformDegree + degree <= 70) {
             platformDegree += degree;
@@ -23,6 +24,8 @@ public class Scania extends Truck {
     }
 
     protected void lowerPlatformDegree(int degree){
+        System.out.println("lowerplatform");
+
         if(degree >= 0 && platformDegree - degree >= 0){
             platformDegree -= degree;
         } else {

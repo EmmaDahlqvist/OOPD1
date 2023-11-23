@@ -14,11 +14,6 @@ public class Car implements Veichle {
         stopEngine();
     }
 
-    public void bounceDirection() {
-        veichleHelper.bounceDirection();
-    }
-
-
     public double getX() {
         return veichleHelper.getX();
     }
@@ -86,8 +81,22 @@ public class Car implements Veichle {
         veichleHelper.turnRight();
     }
 
+    //----------------------------------------
+    public void incrementSpeed(double amount){
+        veichleHelper.currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, veichleHelper.getEnginePower());
+    }
+
+    public void decrementSpeed(double amount){
+        veichleHelper.decrementSpeed(amount);
+    }
+    //-------------------------------------
+
     public void gas(double amount){
-        veichleHelper.gas(amount);
+        if(amount >= 0 && amount <= 1){
+            incrementSpeed(amount);
+        }
+        //-------------------------------------
+        //veichleHelper.gas(amount);
     }
 
     public void brake(double amount) {
