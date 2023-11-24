@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class VeichleHelper {
+public class VehicleHelper {
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     public double currentSpeed; // The current speed of the car
@@ -10,7 +10,7 @@ public class VeichleHelper {
     protected double currentY;
     protected Direction direction;
 
-    protected VeichleHelper(int nrDoors, double enginePower, Color color, String modelName) {
+    protected VehicleHelper(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class BigRig extends Truck{
 
-    LoadHelper<Car> loadHelper;
+    private LoadHelper<Car> loadHelper;
     private final int distanceFromBigRig = 3;
 
     public BigRig(int nrOfDoors, double enginePower, Color color, String modelName, int capacity) {

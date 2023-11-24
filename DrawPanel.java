@@ -1,9 +1,5 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,7 +16,7 @@ public class DrawPanel extends JPanel{
     // To keep track of a singel cars position
 //    Point carPoint = new Point();
 
-    private HashMap<Veichle, String> cars;
+    private HashMap<Vehicle, String> cars;
 
     // TODO: Make this genereal for all cars
 //    void moveit(int x, int y) {
@@ -29,7 +25,7 @@ public class DrawPanel extends JPanel{
 //    }
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, HashMap<Veichle, String> cars) {
+    public DrawPanel(int x, int y, HashMap<Vehicle, String> cars) {
         this.cars = cars;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
@@ -58,7 +54,7 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(Veichle car: cars.keySet()){
+        for(Vehicle car: cars.keySet()){
             try {
                 g.drawImage(ImageIO.read(DrawPanel.class.getResourceAsStream(cars.get(car))), (int) car.getX(), (int) car.getY(), null);
             } catch (IOException e) {

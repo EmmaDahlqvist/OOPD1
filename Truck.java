@@ -1,11 +1,11 @@
 import java.awt.*;
 
-public class Truck implements Veichle{
+public class Truck implements Vehicle {
 
-    private final VeichleHelper veichleHelper;
+    private final VehicleHelper vehicleHelper;
     private boolean platformDownRampUp; //platform down = ramp uppe
     public Truck(int nrOfDoors, double enginePower, Color color, String modelName) {
-        veichleHelper = new VeichleHelper(nrOfDoors, enginePower, color, modelName);
+        vehicleHelper = new VehicleHelper(nrOfDoors, enginePower, color, modelName);
         platformDownRampUp = true;
     }
 
@@ -22,74 +22,74 @@ public class Truck implements Veichle{
     }
 
     public double getX() {
-        return veichleHelper.getX();
+        return vehicleHelper.getX();
     }
 
     public double getY() {
-        return veichleHelper.getY();
+        return vehicleHelper.getY();
     }
 
     public void setX(double x) {
-        veichleHelper.setX(x);
+        vehicleHelper.setX(x);
     }
 
     public void setY(double y) {
-        veichleHelper.setY(y);
+        vehicleHelper.setY(y);
     }
 
     public int getNrDoors(){
-        return veichleHelper.getNrDoors();
+        return vehicleHelper.getNrDoors();
     }
 
     public double getEnginePower(){
-        return veichleHelper.getEnginePower();
+        return vehicleHelper.getEnginePower();
     }
 
     public double getCurrentSpeed(){
-        return veichleHelper.getCurrentSpeed();
+        return vehicleHelper.getCurrentSpeed();
     }
 
     public Color getColor(){
-        return veichleHelper.getColor();
+        return vehicleHelper.getColor();
     }
 
     public void setColor(Color clr){
-        veichleHelper.setColor(clr);
+        vehicleHelper.setColor(clr);
     }
 
     public void startEngine(){
-        veichleHelper.startEngine();
+        vehicleHelper.startEngine();
     }
 
     public void stopEngine(){
-        veichleHelper.stopEngine();
+        vehicleHelper.stopEngine();
     }
 
     public double speedFactor() {
-        return veichleHelper.speedFactor();
+        return vehicleHelper.speedFactor();
     }
 
     public void gas(double amount){
-        veichleHelper.gas(amount);
+        if(platformDownRampUp){
+            vehicleHelper.gas(amount);
+        }
     }
 
     public void brake(double amount) {
-        veichleHelper.brake(amount);
+        vehicleHelper.brake(amount);
     }
 
 
     public void move() {
-        if (platformDownRampUp) {
-            veichleHelper.move();
-        }
+        vehicleHelper.move();
     }
 
     public void turnLeft() {
-        veichleHelper.turnLeft();
+        vehicleHelper.turnLeft();
     }
 
 
     public void turnRight() {
-        veichleHelper.turnRight();
+        vehicleHelper.turnRight();
     }
 }

@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 /*
@@ -23,7 +21,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    HashMap<Veichle, String> cars = new HashMap<>();
+    HashMap<Vehicle, String> cars = new HashMap<>();
 
     //methods:
     public Timer getTimer() {
@@ -35,7 +33,7 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Veichle car : cars.keySet()) {
+            for (Vehicle car : cars.keySet()) {
                 if(car.getX() <= -1 || car.getX() >= 682) { //800 bredd - bilens bredd ish + bugg
                     bounceDirection(car);
                 }
@@ -53,15 +51,15 @@ public class CarController {
         }
     }
 
-    public void initCarPositions(HashMap<Veichle, String> cars){
+    public void initCarPositions(HashMap<Vehicle, String> cars){
         int y = 0;
-        for(Veichle car : cars.keySet()){
+        for(Vehicle car : cars.keySet()){
             car.setY(y);
             y += 100;
         }
     }
 
-    private void bounceDirection(Veichle car){
+    private void bounceDirection(Vehicle car){
         car.turnRight();
         car.turnRight();
     }
@@ -69,20 +67,20 @@ public class CarController {
     // Calls the gas method for each car once
     protected void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Veichle car : cars.keySet()) {
+        for (Vehicle car : cars.keySet()) {
             car.gas(gas);
         }
     }
 
     protected void brake(int amount ){
         double brake = ((double ) amount ) / 100;
-        for(Veichle car: cars.keySet()) {
+        for(Vehicle car: cars.keySet()) {
             car.brake(brake);
         }
     }
 
     protected void setTurboOn(){
-        for(Veichle car: cars.keySet()) {
+        for(Vehicle car: cars.keySet()) {
             if(car instanceof Saab95){
                 ((Saab95) car).setTurboOn();
             }
@@ -90,7 +88,7 @@ public class CarController {
     }
 
     protected void setTurboOff(){
-        for(Veichle car: cars.keySet()) {
+        for(Vehicle car: cars.keySet()) {
             if(car instanceof Saab95){
                 ((Saab95) car).setTurboOff();
             }
@@ -98,7 +96,7 @@ public class CarController {
     }
 
     protected void liftBed(){
-        for(Veichle car: cars.keySet()) {
+        for(Vehicle car: cars.keySet()) {
             if(car instanceof Scania){
                 ((Scania) car).raisePlatformDegree(70);
             }
@@ -107,12 +105,23 @@ public class CarController {
     }
 
     protected void lowerBed(){
-        for(Veichle car: cars.keySet()) {
+        for(Vehicle car: cars.keySet()) {
             if(car instanceof Scania){
                 ((Scania) car).lowerPlatformDegree(70);
             }
         }
+    }
 
+    protected void startVehicle() {
+        for (Vehicle car: cars.keySet()) {
+            car.startEngine();
+        }
+    }
+
+    protected void stopVehicle() {
+        for (Vehicle car: cars.keySet()) {
+            car.stopEngine();
+        }
     }
 
 }

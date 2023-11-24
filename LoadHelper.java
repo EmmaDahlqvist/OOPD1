@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadHelper<T extends Veichle> {
+public class LoadHelper<T extends Vehicle> {
 
     private List<T> listOfLoadedCars = new ArrayList<>();
 

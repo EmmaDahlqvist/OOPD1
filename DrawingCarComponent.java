@@ -7,7 +7,7 @@ public class DrawingCarComponent {
     Point point = new Point(0,0);
     BufferedImage bufferedImage;
 
-    public DrawingCarComponent(Veichle car, String image) {
+    public DrawingCarComponent(Vehicle car, String image) {
         try {
             this.bufferedImage = ImageIO.read(DrawingCarComponent.class.getResourceAsStream(image));
         } catch (IOException e) {

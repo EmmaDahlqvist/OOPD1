@@ -1,15 +1,13 @@
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.util.HashMap;
 
-public class Car implements Veichle {
+public abstract class Car implements Vehicle {
 
-    private final VeichleHelper veichleHelper;
+    private final VehicleHelper veichleHelper;
 
     public boolean loadStatus = false;
 
     protected Car(int nrDoors, double enginePower, Color color, String modelName) {
-        veichleHelper = new VeichleHelper(nrDoors, enginePower, color, modelName);
+        veichleHelper = new VehicleHelper(nrDoors, enginePower, color, modelName);
 
         stopEngine();
     }
@@ -81,22 +79,8 @@ public class Car implements Veichle {
         veichleHelper.turnRight();
     }
 
-    //----------------------------------------
-    public void incrementSpeed(double amount){
-        veichleHelper.currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, veichleHelper.getEnginePower());
-    }
-
-    public void decrementSpeed(double amount){
-        veichleHelper.decrementSpeed(amount);
-    }
-    //-------------------------------------
-
     public void gas(double amount){
-        if(amount >= 0 && amount <= 1){
-            incrementSpeed(amount);
-        }
-        //-------------------------------------
-        //veichleHelper.gas(amount);
+        veichleHelper.gas(amount);
     }
 
     public void brake(double amount) {

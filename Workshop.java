@@ -1,8 +1,8 @@
 import java.util.List;
 
-public class Workshop <T extends Veichle> {
+public class Workshop <T extends Vehicle> {
 
-    LoadHelper<T> loadHelper;
+    private LoadHelper<T> loadHelper;
 
     public Workshop(int capacity) {
         loadHelper = new LoadHelper<>(capacity);

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public interface Veichle extends Movable {
+public interface Vehicle extends Movable {
 
     double getX();
 
