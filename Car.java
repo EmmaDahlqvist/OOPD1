@@ -29,7 +29,7 @@ public abstract class Car implements Vehicle {
     }
 
     public Direction getDirection() {
-        return veichleHelper.direction;
+        return veichleHelper.getDirection();
     }
 
     public int getNrDoors(){
