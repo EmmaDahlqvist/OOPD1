@@ -11,17 +11,6 @@ public class Main {
 
         cc.initCarPositions(cc.cars);
 
-//        Veichle saab = new Saab95();
-//        saab.setY(100);
-//
-//        Veichle volvo = new Volvo240();
-//
-//        Veichle scania = new Scania();
-//        scania.setY(200);
-//
-//        cc.cars.put(scania,"pics/Scania.jpg");
-//        cc.cars.put(saab, "pics/Saab95.jpg");
-
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);

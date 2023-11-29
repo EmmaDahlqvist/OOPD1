@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -28,11 +29,12 @@ public class CarController {
         return timer;
     }
 
+
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
             for (Vehicle car : cars.keySet()) {
                 if(car.getX() <= -1 || car.getX() >= 682) { //800 bredd - bilens bredd ish + bugg
                     bounceDirection(car);
@@ -50,6 +52,7 @@ public class CarController {
             }
         }
     }
+
 
     public void initCarPositions(HashMap<Vehicle, String> cars){
         int y = 0;

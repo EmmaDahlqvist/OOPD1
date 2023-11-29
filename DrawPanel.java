@@ -61,6 +61,5 @@ public class DrawPanel extends JPanel{
                 throw new RuntimeException(e);
             }
         }
-
     }
 }
