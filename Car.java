@@ -2,88 +2,90 @@ import java.awt.*;
 
 public abstract class Car implements Vehicle {
 
-    private final VehicleHelper veichleHelper;
+    protected VehicleHelper vehicleHelper;
 
     public boolean loadStatus = false;
 
-    protected Car(int nrDoors, double enginePower, Color color, String modelName) {
-        veichleHelper = new VehicleHelper(nrDoors, enginePower, color, modelName);
+    protected Car() {
+        vehicleHelper = initVehicleHelper();
 
         stopEngine();
     }
 
+    protected abstract VehicleHelper initVehicleHelper();
+
     public double getX() {
-        return veichleHelper.getX();
+        return vehicleHelper.getX();
     }
 
     public double getY() {
-        return veichleHelper.getY();
+        return vehicleHelper.getY();
     }
 
     public void setX(double x){
-        veichleHelper.setX(x);
+        vehicleHelper.setX(x);
     }
 
     public void setY(double y){
-        veichleHelper.setY(y);
+        vehicleHelper.setY(y);
     }
 
     public Direction getDirection() {
-        return veichleHelper.getDirection();
+        return vehicleHelper.getDirection();
     }
 
     public int getNrDoors(){
-        return veichleHelper.getNrDoors();
+        return vehicleHelper.getNrDoors();
     }
 
     public double getEnginePower(){
-        return veichleHelper.getEnginePower();
+        return vehicleHelper.getEnginePower();
     }
 
     public double getCurrentSpeed(){
-        return veichleHelper.getCurrentSpeed();
+        return vehicleHelper.getCurrentSpeed();
     }
 
     public Color getColor(){
-        return veichleHelper.getColor();
+        return vehicleHelper.getColor();
     }
 
     public void setColor(Color clr){
-        veichleHelper.setColor(clr);
+        vehicleHelper.setColor(clr);
     }
 
     public void startEngine(){
-        veichleHelper.startEngine();
+        vehicleHelper.startEngine();
     }
 
     public void stopEngine(){
-        veichleHelper.stopEngine();
+        vehicleHelper.stopEngine();
     }
 
     public double speedFactor() {
-        return veichleHelper.speedFactor();
+        return vehicleHelper.speedFactor();
     }
 
     public void move() {
         if(!loadStatus){
-            veichleHelper.move();
+            vehicleHelper.move();
         }
     }
 
     public void turnLeft() {
-        veichleHelper.turnLeft();
+        vehicleHelper.turnLeft();
     }
 
 
     public void turnRight() {
-        veichleHelper.turnRight();
+        vehicleHelper.turnRight();
     }
 
     public void gas(double amount){
-        veichleHelper.gas(amount);
+        vehicleHelper.gas(amount);
     }
 
     public void brake(double amount) {
-        veichleHelper.brake(amount);
+        vehicleHelper.brake(amount);
     }
 }

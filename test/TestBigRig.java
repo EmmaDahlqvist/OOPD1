@@ -15,7 +15,7 @@ public class TestBigRig {
 
     @Before
     public void init() {
-        bigRig = new BigRig(2, 350, Color.black, "BiggestRig", 1);
+        bigRig = new BigRig(1);
         car = new Volvo240();
         car2 = new Saab95();
 

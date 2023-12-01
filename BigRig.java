@@ -2,15 +2,21 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BigRig extends Truck{
+public class BigRig extends Truck implements SpeedFactorImplementor{
 
     private LoadHelper<Car> loadHelper;
+
     private final int distanceFromBigRig = 3;
 
-    public BigRig(int nrOfDoors, double enginePower, Color color, String modelName, int capacity) {
-        super(nrOfDoors, enginePower, color, modelName);
+    public BigRig(int capacity) {
         loadHelper = new LoadHelper<>(capacity);
     }
+
+    @Override
+    protected VehicleHelper initVehicleHelper() {
+        return new VehicleHelper(2, 350, Color.black, "BiggestRig", this);
+    }
+
 
     protected void loadCar(Car car){
         if(!getPlatformDownRampUp()) {
@@ -36,6 +42,7 @@ public class BigRig extends Truck{
             car.setY(car.getY() + distanceFromBigRig);
         }
     }
+
 
     @Override
     public void move(){

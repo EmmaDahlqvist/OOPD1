@@ -1,13 +1,17 @@
 import java.awt.*;
 
-public class Truck implements Vehicle {
+public abstract class Truck implements Vehicle {
 
-    private final VehicleHelper vehicleHelper;
+    protected VehicleHelper vehicleHelper;
+
     private boolean platformDownRampUp; //platform down = ramp uppe
-    public Truck(int nrOfDoors, double enginePower, Color color, String modelName) {
-        vehicleHelper = new VehicleHelper(nrOfDoors, enginePower, color, modelName);
+    public Truck() {
+        vehicleHelper = initVehicleHelper();
+
         platformDownRampUp = true;
     }
+
+    protected abstract VehicleHelper initVehicleHelper();
 
     protected boolean getPlatformDownRampUp(){
         return platformDownRampUp;

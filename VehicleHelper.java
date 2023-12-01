@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class VehicleHelper {
+public class VehicleHelper{
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     public double currentSpeed; // The current speed of the car
@@ -10,7 +10,9 @@ public class VehicleHelper {
     protected double currentY;
     protected Direction direction;
 
-    protected VehicleHelper(int nrDoors, double enginePower, Color color, String modelName) {
+    SpeedFactorImplementor vehicle;
+
+    protected VehicleHelper(int nrDoors, double enginePower, Color color, String modelName, SpeedFactorImplementor speedFactorImplementor) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -18,6 +20,8 @@ public class VehicleHelper {
         this.currentX = 0;
         this.currentY = 0;
         this.direction = Direction.EAST;
+        this.vehicle = speedFactorImplementor;
+
 
         stopEngine();
     }
@@ -71,7 +75,10 @@ public class VehicleHelper {
     }
 
     protected double speedFactor() {
-        return getEnginePower()*0.01;
+        //return getEnginePower()*0.01;
+        System.out.println("vehicle helper körs");
+
+        return vehicle.speedFactor();
     }
 
     public void move() {

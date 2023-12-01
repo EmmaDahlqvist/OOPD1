@@ -1,12 +1,16 @@
 import java.awt.*;
 
-public class Scania extends Truck {
+public class Scania extends Truck implements SpeedFactorImplementor{
 
     private int platformDegree;
 
     protected Scania() {
-        super(2, 350, Color.BLUE, "Scania");
         platformDegree = 0;
+    }
+
+    @Override
+    protected VehicleHelper initVehicleHelper() {
+        return new VehicleHelper(2, 350, Color.BLUE, "Scania", this);
     }
 
     public int getPlatformDegree(){
@@ -43,6 +47,11 @@ public class Scania extends Truck {
         if(platformDegree > 0){
             super.raisePlatformLowerRamp();
         }
+    }
+
+    @Override
+    public double speedFactor(){
+        return getEnginePower() * 0.01;
     }
 
 }
