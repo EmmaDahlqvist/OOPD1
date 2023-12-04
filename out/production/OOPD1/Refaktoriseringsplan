@@ -1,0 +1,15 @@
+Refaktoriseringsplan
+
+Steg 1: Börja med att dela upp interfacet Vehicle och Movable till Vehicle, movable och engine
+
+Steg 2: Dela upp vehiclehelper till en vehiclehelper med generella bil egenskaper och en vehiclemovementhelper med egenskaper för en bils rörelse
+
+Steg 3: Skapa Worlden som applicerar timeListener och annan domänlogik, så att den förblir en del av modellen, ta in world i CarController, CarView, DrawPanel och Main.
+
+Steg 4: Inför actioneventsen i carcontroller (de som nu är i carview)
+
+Setg 5: Ta bort domänlogiken och ActionEventsen från CarView.. (ActionEvents flyttas över till CarController)
+
+Steg 6: Ändra logiken i drawpanel så att den beror på world istället för car-HashMapen som kom från CarController
+
+Steg 7: Lägga ihop och applicera programmet i main

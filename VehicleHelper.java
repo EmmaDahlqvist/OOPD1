@@ -75,9 +75,6 @@ public class VehicleHelper{
     }
 
     protected double speedFactor() {
-        //return getEnginePower()*0.01;
-        System.out.println("vehicle helper körs");
-
         return vehicle.speedFactor();
     }
 

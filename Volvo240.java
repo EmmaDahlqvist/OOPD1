@@ -20,7 +20,6 @@ public class Volvo240 extends Car implements SpeedFactorImplementor{
 
     @Override
     public double speedFactor(){
-        System.out.println("volvo körs");
         return getEnginePower() * 0.01 * trimFactor;
     }
 }

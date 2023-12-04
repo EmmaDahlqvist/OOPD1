@@ -36,7 +36,7 @@ public class CarController {
     private class TimerListener implements ActionListener {
             public void actionPerformed(ActionEvent e) {
             for (Vehicle car : cars.keySet()) {
-                if(car.getX() <= -1 || car.getX() >= 682) { //800 bredd - bilens bredd ish + bugg
+                if(car.getX() <= 0 || car.getX() >= 700) { //800 bredd - bilens bredd
                     bounceDirection(car);
                 }
 
