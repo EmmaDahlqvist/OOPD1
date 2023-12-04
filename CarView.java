@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800; //möjligtvis lägga till en helper till programfönstret..?
-    private static final int Y = 800;
+    private final int X;
+    private final int Y;
 
     // The controller member
     CarController carC;
@@ -26,7 +26,7 @@ public class CarView extends JFrame{
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
+//    int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
     JButton gasButton = new JButton("Gas");
@@ -39,10 +39,15 @@ public class CarView extends JFrame{
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
+    private World world;
+
     // Constructor
-    public CarView(String framename, CarController cc){
+    public CarView(String framename, CarController cc, World world){
+        this.world = world;
         this.carC = cc;
-        drawPanel = new DrawPanel(X, Y-240, cc.cars);
+        this.X = world.width;
+        this.Y = world.height;
+        drawPanel = new DrawPanel(world.width, world.height-240, world.vehicles);
         initComponents(framename);
     }
 
@@ -51,7 +56,7 @@ public class CarView extends JFrame{
     private void initComponents(String title) {
 
         this.setTitle(title);
-        this.setPreferredSize(new Dimension(X,Y));
+        this.setPreferredSize(new Dimension(X, Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
@@ -65,7 +70,7 @@ public class CarView extends JFrame{
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
+                world.gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
 
@@ -104,14 +109,14 @@ public class CarView extends JFrame{
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                carC.gas(world.gasAmount);
             }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(gasAmount);
+                carC.brake(world.gasAmount);
             }
         });
 

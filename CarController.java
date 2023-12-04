@@ -17,73 +17,93 @@ public class CarController {
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+//    private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+//    CarView frame;
     // A list of cars, modify if needed
-    protected HashMap<Vehicle, String> cars = new HashMap<>();
+//    protected HashMap<Vehicle, String> cars = new HashMap<>();
+
+    private World world;
+
+    private CarView carView;
+
+    public CarController(World world, CarView carView){
+        this.world = world;
+        this.carView = carView;
+
+        initButtonwuihwui();
+    }
+
+    private void initButtonwuihwui(){
+        carView.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gas(world.gasAmount);
+            }
+        });
+    }
 
     //methods:
-    public Timer getTimer() {
-        return timer;
-    }
+//    public Timer getTimer() {
+//        return timer;
+//    }
 
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    private class TimerListener implements ActionListener {
-            public void actionPerformed(ActionEvent e) {
-            for (Vehicle car : cars.keySet()) {
-                if(car.getX() <= 0 || car.getX() >= 700) { //800 bredd - bilens bredd
-                    bounceDirection(car);
-                }
-
-                car.move();
-
-
+//    private class TimerListener implements ActionListener {
+//            public void actionPerformed(ActionEvent e) {
+//            for (Vehicle car : cars.keySet()) {
+//                if(car.getX() <= 0 || car.getX() >= 700) { //800 bredd - bilens bredd
+//                    bounceDirection(car);
+//                }
+//
 //                car.move();
-//                int x = (int) Math.round(car.getX());
-//                int y = (int) Math.round(car.getY());
-//                frame.drawPanel.moveit(x, y);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-            }
-        }
-    }
+//
+//
+////                car.move();
+////                int x = (int) Math.round(car.getX());
+////                int y = (int) Math.round(car.getY());
+////                frame.drawPanel.moveit(x, y);
+//                // repaint() calls the paintComponent method of the panel
+//                frame.drawPanel.repaint();
+//            }
+//        }
+//    }
 
 
-    public void initCarPositions(HashMap<Vehicle, String> cars){
-        int y = 0;
-        for(Vehicle car : cars.keySet()){
-            car.setY(y);
-            y += 100;
-        }
-    }
+//    public void initCarPositions(HashMap<Vehicle, String> cars){
+//        int y = 0;
+//        for(Vehicle car : cars.keySet()){
+//            car.setY(y);
+//            y += 100;
+//        }
+//    }
 
-    private void bounceDirection(Vehicle car){
-        car.turnRight();
-        car.turnRight();
-    }
+//    private void bounceDirection(Vehicle car){
+//        car.turnRight();
+//        car.turnRight();
+//    }
 
     // Calls the gas method for each car once
     protected void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle car : cars.keySet()) {
+        for (Vehicle car : world.vehicles.keySet()) {
             car.gas(gas);
         }
     }
 
     protected void brake(int amount ){
         double brake = ((double ) amount ) / 100;
-        for(Vehicle car: cars.keySet()) {
+        for(Vehicle car: world.vehicles.keySet()) {
             car.brake(brake);
         }
     }
 
     protected void setTurboOn(){
-        for(Vehicle car: cars.keySet()) {
+        for(Vehicle car: world.vehicles.keySet()) {
             if(car instanceof Saab95){
                 ((Saab95) car).setTurboOn();
             }
@@ -91,7 +111,7 @@ public class CarController {
     }
 
     protected void setTurboOff(){
-        for(Vehicle car: cars.keySet()) {
+        for(Vehicle car: world.vehicles.keySet()) {
             if(car instanceof Saab95){
                 ((Saab95) car).setTurboOff();
             }
@@ -99,7 +119,7 @@ public class CarController {
     }
 
     protected void liftBed(){
-        for(Vehicle car: cars.keySet()) {
+        for(Vehicle car: world.vehicles.keySet()) {
             if(car instanceof Scania){
                 ((Scania) car).raisePlatformDegree(70);
             }
@@ -108,7 +128,7 @@ public class CarController {
     }
 
     protected void lowerBed(){
-        for(Vehicle car: cars.keySet()) {
+        for(Vehicle car: world.vehicles.keySet()) {
             if(car instanceof Scania){
                 ((Scania) car).lowerPlatformDegree(70);
             }
@@ -116,13 +136,13 @@ public class CarController {
     }
 
     protected void startVehicle() {
-        for (Vehicle car: cars.keySet()) {
+        for (Vehicle car: world.vehicles.keySet()) {
             car.startEngine();
         }
     }
 
     protected void stopVehicle() {
-        for (Vehicle car: cars.keySet()) {
+        for (Vehicle car: world.vehicles.keySet()) {
             car.stopEngine();
         }
     }
