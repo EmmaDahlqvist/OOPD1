@@ -6,13 +6,13 @@ public class Saab95 extends Car implements SpeedFactorImplementor{
     protected boolean turboOn;
 
     protected Saab95(){
-        //super(2, 125, Color.red, "Saab95");
+        super(2, Color.red, "Saab95");
 	    turboOn = false;
     }
 
     @Override
-    protected VehicleHelper initVehicleHelper() {
-        return new VehicleHelper(2, 125, Color.red, "Saab95", this);
+    protected VehicleMovementHelper initVehicleHelper() {
+        return new VehicleMovementHelper(125, this);
     }
 
     protected void setTurboOn(){

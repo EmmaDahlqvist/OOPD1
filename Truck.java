@@ -3,15 +3,17 @@ import java.awt.*;
 public abstract class Truck implements Vehicle {
 
     protected VehicleHelper vehicleHelper;
+    protected VehicleMovementHelper vehicleMovementHelper;
 
     private boolean platformDownRampUp; //platform down = ramp uppe
-    public Truck() {
-        vehicleHelper = initVehicleHelper();
+    public Truck(int nrDoors, Color color, String modelName) {
+        vehicleMovementHelper = initVehicleHelper();
+        vehicleHelper = new VehicleHelper(nrDoors, color, modelName);
 
         platformDownRampUp = true;
     }
 
-    protected abstract VehicleHelper initVehicleHelper();
+    protected abstract VehicleMovementHelper initVehicleHelper();
 
     protected boolean getPlatformDownRampUp(){
         return platformDownRampUp;
@@ -26,19 +28,19 @@ public abstract class Truck implements Vehicle {
     }
 
     public double getX() {
-        return vehicleHelper.getX();
+        return vehicleMovementHelper.getX();
     }
 
     public double getY() {
-        return vehicleHelper.getY();
+        return vehicleMovementHelper.getY();
     }
 
     public void setX(double x) {
-        vehicleHelper.setX(x);
+        vehicleMovementHelper.setX(x);
     }
 
     public void setY(double y) {
-        vehicleHelper.setY(y);
+        vehicleMovementHelper.setY(y);
     }
 
     public int getNrDoors(){
@@ -46,11 +48,11 @@ public abstract class Truck implements Vehicle {
     }
 
     public double getEnginePower(){
-        return vehicleHelper.getEnginePower();
+        return vehicleMovementHelper.getEnginePower();
     }
 
     public double getCurrentSpeed(){
-        return vehicleHelper.getCurrentSpeed();
+        return vehicleMovementHelper.getCurrentSpeed();
     }
 
     public Color getColor(){
@@ -62,38 +64,38 @@ public abstract class Truck implements Vehicle {
     }
 
     public void startEngine(){
-        vehicleHelper.startEngine();
+        vehicleMovementHelper.startEngine();
     }
 
     public void stopEngine(){
-        vehicleHelper.stopEngine();
+        vehicleMovementHelper.stopEngine();
     }
 
     public double speedFactor() {
-        return vehicleHelper.speedFactor();
+        return vehicleMovementHelper.speedFactor();
     }
 
     public void gas(double amount){
         if(platformDownRampUp){
-            vehicleHelper.gas(amount);
+            vehicleMovementHelper.gas(amount);
         }
     }
 
     public void brake(double amount) {
-        vehicleHelper.brake(amount);
+        vehicleMovementHelper.brake(amount);
     }
 
 
     public void move() {
-        vehicleHelper.move();
+        vehicleMovementHelper.move();
     }
 
     public void turnLeft() {
-        vehicleHelper.turnLeft();
+        vehicleMovementHelper.turnLeft();
     }
 
 
     public void turnRight() {
-        vehicleHelper.turnRight();
+        vehicleMovementHelper.turnRight();
     }
 }

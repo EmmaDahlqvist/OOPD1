@@ -5,12 +5,13 @@ public class Scania extends Truck implements SpeedFactorImplementor{
     private int platformDegree;
 
     protected Scania() {
+        super(2, Color.BLUE, "Scania");
         platformDegree = 0;
     }
 
     @Override
-    protected VehicleHelper initVehicleHelper() {
-        return new VehicleHelper(2, 350, Color.BLUE, "Scania", this);
+    protected VehicleMovementHelper initVehicleHelper() {
+        return new VehicleMovementHelper(350, this);
     }
 
     public int getPlatformDegree(){

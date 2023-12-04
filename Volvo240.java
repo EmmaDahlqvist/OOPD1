@@ -5,17 +5,12 @@ public class Volvo240 extends Car implements SpeedFactorImplementor{
     private final static double trimFactor = 1.25;
 
     protected Volvo240() {
-        //vehicleHelper = new VehicleHelper(4, 100, Color.black, "Volvo240", this);
+        super(4, Color.black, "Volvo240");
     }
 
     @Override
-    protected VehicleHelper initVehicleHelper() {
-         return new VehicleHelper(4, 100, Color.black, "Volvo240", new SpeedFactorImplementor() {
-             @Override
-             public double speedFactor() {
-                 return Volvo240.this.speedFactor();
-             }
-         });
+    protected VehicleMovementHelper initVehicleHelper() {
+         return new VehicleMovementHelper(100, this);
     }
 
     @Override

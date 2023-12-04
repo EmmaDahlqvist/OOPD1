@@ -9,12 +9,13 @@ public class BigRig extends Truck implements SpeedFactorImplementor{
     private final int distanceFromBigRig = 3;
 
     public BigRig(int capacity) {
+        super(2, Color.black, "BiggestRig");
         loadHelper = new LoadHelper<>(capacity);
     }
 
     @Override
-    protected VehicleHelper initVehicleHelper() {
-        return new VehicleHelper(2, 350, Color.black, "BiggestRig", this);
+    protected VehicleMovementHelper initVehicleHelper() {
+        return new VehicleMovementHelper(350, this);
     }
 
 
@@ -57,5 +58,10 @@ public class BigRig extends Truck implements SpeedFactorImplementor{
 
     public List<Car> getListOfLoadedCars() {
         return loadHelper.getListOfLoadedCars();
+    }
+
+    @Override
+    public double speedFactor(){
+        return getEnginePower() * 0.01;
     }
 }
