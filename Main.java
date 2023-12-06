@@ -1,20 +1,19 @@
 
 public class Main {
     public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
+        World world = new World();
+        DrawPanel drawPanel = new DrawPanel(world.width, world.height-240, world.vehicles);
+        CarView carView = new CarView("CarSim 2.0", drawPanel, world);
+        CarController cc = new CarController(world, carView);
 
-        cc.cars.put(new Volvo240(), "pics/Volvo240.jpg");
-        cc.cars.put(new Scania(), "pics/Scania.jpg");
-        cc.cars.put(new Saab95(), "pics/Saab95.jpg");
+        world.addCarToWorld(new Volvo240(), "pics/Volvo240.jpg", 0, 0);
+        world.addCarToWorld(new Scania(), "pics/Scania.jpg", 0, 100);
+        world.addCarToWorld(new Saab95(), "pics/Saab95.jpg", 0, 200);
 
-        cc.initCarPositions(cc.cars);
+        //lägg till observer som notifieras vid rörelseändringar
+        world.addMovementObservers(drawPanel);
 
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.getTimer().start();
+        world.getTimer().start();
     }
 
 }

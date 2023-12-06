@@ -10,25 +10,17 @@ import java.awt.event.ActionListener;
  * It initializes with being center on the screen and attaching it's controller in it's state.
  * It communicates with the Controller by calling methods of it when an action fires of in
  * each of it's components.
- * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
 public class CarView extends JFrame{
     private final int X;
     private final int Y;
 
-    // The controller member
-    CarController carC;
-
     DrawPanel drawPanel;
-
     JPanel controlPanel = new JPanel();
-
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
-//    int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
-
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
     JButton turboOnButton = new JButton("Saab Turbo on");
@@ -42,12 +34,11 @@ public class CarView extends JFrame{
     private World world;
 
     // Constructor
-    public CarView(String framename, CarController cc, World world){
+    public CarView(String framename, DrawPanel drawPanel, World world){
         this.world = world;
-        this.carC = cc;
         this.X = world.width;
         this.Y = world.height;
-        drawPanel = new DrawPanel(world.width, world.height-240, world.vehicles);
+        this.drawPanel = drawPanel;
         initComponents(framename);
     }
 
@@ -68,11 +59,6 @@ public class CarView extends JFrame{
                         100, //max
                         1);//step
         gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                world.gasAmount = (int) ((JSpinner)e.getSource()).getValue();
-            }
-        });
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -103,64 +89,6 @@ public class CarView extends JFrame{
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
-
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.gas(world.gasAmount);
-            }
-        });
-
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.brake(world.gasAmount);
-            }
-        });
-
-        turboOnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.setTurboOn();
-            }
-        });
-
-        turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.setTurboOff();
-            }
-        });
-
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.liftBed();
-            }
-        });
-
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.lowerBed();
-            }
-        });
-
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.startVehicle();
-            }
-        });
-
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.stopVehicle();
-            }
-        });
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

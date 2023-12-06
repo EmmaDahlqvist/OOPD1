@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class World {
     public int width = 800;
@@ -10,6 +12,8 @@ public class World {
     private Timer timer = new Timer(delay, new TimerListener());
     public int gasAmount = 0;
     public HashMap<Vehicle, String> vehicles = new HashMap<>();
+
+    List<MovementObserver> movementObservers = new ArrayList<>();
     public World() {
 
     }
@@ -36,11 +40,20 @@ public class World {
                 if(vehicle.getX() <= 0 || vehicle.getX() >= 700) { //800 bredd - bilens bredd
                     bounceDirection(vehicle);
                 }
-
+                System.out.println(vehicle.getCurrentSpeed());
                 vehicle.move();
-
-                frame.drawPanel.repaint();
+                notifyMovementObservers();
             }
+        }
+    }
+
+    public void addMovementObservers(MovementObserver movementObserver){
+        movementObservers.add(movementObserver);
+    }
+
+    public void notifyMovementObservers(){
+        for (MovementObserver movementObserver : movementObservers) {
+            movementObserver.actOnMovementChange();
         }
     }
 }
