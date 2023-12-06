@@ -15,6 +15,10 @@ public class VehicleHelper{
         return nrDoors;
     }
 
+    protected String getModelName() {
+        return modelName;
+    }
+
 
     protected Color getColor(){
         return color;

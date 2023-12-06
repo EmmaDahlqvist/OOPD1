@@ -15,6 +15,10 @@ public abstract class Truck implements Vehicle {
 
     protected abstract VehicleMovementHelper initVehicleHelper();
 
+    public String getModelName() {
+        return vehicleHelper.getModelName();
+    }
+
     protected boolean getPlatformDownRampUp(){
         return platformDownRampUp;
     }

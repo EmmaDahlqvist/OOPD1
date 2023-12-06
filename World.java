@@ -11,15 +11,15 @@ public class World {
     private int delay = 50;
     private Timer timer = new Timer(delay, new TimerListener());
     public int gasAmount = 0;
-    public HashMap<Vehicle, String> vehicles = new HashMap<>();
+    public List<Vehicle> vehicles = new ArrayList<>();
 
     List<MovementObserver> movementObservers = new ArrayList<>();
     public World() {
 
     }
 
-    public void addCarToWorld(Vehicle vehicle, String image, int x, int y){
-        vehicles.put(vehicle, image);
+    public void addCarToWorld(Vehicle vehicle, int x, int y){
+        vehicles.add(vehicle);
         vehicle.setY(y);
         vehicle.setX(x);
     }
@@ -36,11 +36,10 @@ public class World {
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehicle vehicle : vehicles.keySet()) {
+            for (Vehicle vehicle : vehicles) {
                 if(vehicle.getX() <= 0 || vehicle.getX() >= 700) { //800 bredd - bilens bredd
                     bounceDirection(vehicle);
                 }
-                System.out.println(vehicle.getCurrentSpeed());
                 vehicle.move();
                 notifyMovementObservers();
             }

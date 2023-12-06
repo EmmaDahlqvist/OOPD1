@@ -15,6 +15,9 @@ public abstract class Car implements Vehicle {
     }
 
     protected abstract VehicleMovementHelper initVehicleHelper();
+    public String getModelName() {
+        return vehicleHelper.getModelName();
+    }
 
     public double getX() {
         return vehicleMovementHelper.getX();

@@ -90,20 +90,20 @@ public class CarController {
     // Calls the gas method for each car once
     protected void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle car : world.vehicles.keySet()) {
+        for (Vehicle car : world.vehicles) {
             car.gas(gas);
         }
     }
 
     protected void brake(int amount ){
         double brake = ((double ) amount ) / 100;
-        for(Vehicle car: world.vehicles.keySet()) {
+        for(Vehicle car:world.vehicles) {
             car.brake(brake);
         }
     }
 
     protected void setTurboOn(){
-        for(Vehicle car: world.vehicles.keySet()) {
+        for(Vehicle car: world.vehicles) {
             if(car instanceof Saab95){
                 ((Saab95) car).setTurboOn();
             }
@@ -111,7 +111,7 @@ public class CarController {
     }
 
     protected void setTurboOff(){
-        for(Vehicle car: world.vehicles.keySet()) {
+        for(Vehicle car: world.vehicles) {
             if(car instanceof Saab95){
                 ((Saab95) car).setTurboOff();
             }
@@ -119,7 +119,7 @@ public class CarController {
     }
 
     protected void liftBed(){
-        for(Vehicle car: world.vehicles.keySet()) {
+        for(Vehicle car: world.vehicles) {
             if(car instanceof Scania){
                 ((Scania) car).raisePlatformDegree(70);
             }
@@ -127,7 +127,7 @@ public class CarController {
     }
 
     protected void lowerBed(){
-        for(Vehicle car: world.vehicles.keySet()) {
+        for(Vehicle car: world.vehicles) {
             if(car instanceof Scania){
                 ((Scania) car).lowerPlatformDegree(70);
             }
@@ -135,13 +135,13 @@ public class CarController {
     }
 
     protected void startVehicle() {
-        for (Vehicle car: world.vehicles.keySet()) {
+        for (Vehicle car: world.vehicles) {
             car.startEngine();
         }
     }
 
     protected void stopVehicle() {
-        for (Vehicle car: world.vehicles.keySet()) {
+        for (Vehicle car: world.vehicles) {
             car.stopEngine();
         }
     }

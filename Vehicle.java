@@ -11,4 +11,6 @@ public interface Vehicle extends Movable, Engine{
     Color getColor();
 
     void setColor(Color clr);
+
+    String getModelName();
 }
