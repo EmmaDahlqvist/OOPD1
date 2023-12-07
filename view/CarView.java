@@ -17,6 +17,7 @@ public class CarView extends JFrame{
 
     private DrawPanel drawPanel;
     public JPanel controlPanel = new JPanel();
+    public JPanel initCarPanel = new JPanel();
     public JPanel gasPanel = new JPanel();
     public JSpinner gasSpinner = new JSpinner();
     public JLabel gasLabel = new JLabel("Amount of gas");
@@ -26,6 +27,8 @@ public class CarView extends JFrame{
     public JButton turboOffButton = new JButton("Saab Turbo off");
     public JButton liftBedButton = new JButton("Scania Lift Bed");
     public JButton lowerBedButton = new JButton("Lower Lift Bed");
+    public JButton addCarButton = new JButton("Add car");
+    public JButton removeCarButton = new JButton("Remove Car");
 
     public JButton startButton = new JButton("Start all cars");
     public JButton stopButton = new JButton("Stop all cars");
@@ -77,17 +80,36 @@ public class CarView extends JFrame{
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
+        initCarPanel.setLayout(new GridLayout(2,2));
 
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(startButton);
+        initCarPanel.add(startButton, 0);
+        initCarPanel.add(stopButton, 1);
+        initCarPanel.add(addCarButton, 2);
+        initCarPanel.add(removeCarButton, 3);
+        initCarPanel.setPreferredSize(new Dimension((X/5-15)*2, 200));
+        this.add(initCarPanel);
+        initCarPanel.setBackground(Color.YELLOW);
 
-
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(stopButton);
+//        startButton.setBackground(Color.blue);
+//        startButton.setForeground(Color.green);
+//        startButton.setPreferredSize(new Dimension(X/5-15,100));
+//        this.add(startButton);
+//
+//
+//        stopButton.setBackground(Color.red);
+//        stopButton.setForeground(Color.black);
+//        stopButton.setPreferredSize(new Dimension(X/5-15,100));
+//        this.add(stopButton);
+//
+//        addCarButton.setBackground(Color.green);
+//        addCarButton.setForeground(Color.black);
+//        addCarButton.setPreferredSize(new Dimension(X/5-15,100));
+//        this.add(addCarButton);
+//
+//        removeCarButton.setBackground(Color.YELLOW);
+//        removeCarButton.setForeground(Color.black);
+//        removeCarButton.setPreferredSize(new Dimension(X/5-15,100));
+//        this.add(removeCarButton);
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

@@ -3,13 +3,18 @@ package model;
 public class NotMovableState implements MovableState{
 
 
-    @Override
-    public void changeState(Truck truck) {
-        truck.setMovableState(new IsMovableState());
+    public void gas(double amount){
+        //TOM
     }
 
     @Override
-    public void move() {
+    public void incrementSpeed(double amount) {
 
+    }
+
+
+    @Override
+    public void changeState(Vehicle vehicle) {
+        vehicle.setMovableState(new IsMovableState());
     }
 }

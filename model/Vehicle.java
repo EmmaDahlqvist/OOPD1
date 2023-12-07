@@ -18,4 +18,8 @@ public interface Vehicle extends Movable, Engine {
     void setColor(Color clr);
 
     String getModelName();
+
+    void setMovableState(MovableState state);
+
+    void incrementSpeed(double amount);
 }

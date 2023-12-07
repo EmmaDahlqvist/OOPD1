@@ -17,6 +17,11 @@ public class BigRig extends Truck implements SpeedFactorImplementor {
     }
 
     @Override
+    protected MovableState initMovableState() {
+        return new IsMovableState(350, this);
+    }
+
+    @Override
     protected VehicleMovementHelper initVehicleHelper() {
         return new VehicleMovementHelper(350, this);
     }

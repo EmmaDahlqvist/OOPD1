@@ -6,14 +6,18 @@ public abstract class Truck implements Vehicle {
 
     protected VehicleHelper vehicleHelper;
     protected VehicleMovementHelper vehicleMovementHelper;
+//    protected MovableState state;
 
     private boolean platformDownRampUp; //platform down = ramp uppe
     public Truck(int nrDoors, Color color, String modelName) {
+//        state = initMovableState();
         vehicleMovementHelper = initVehicleHelper();
         vehicleHelper = new VehicleHelper(nrDoors, color, modelName);
 
         platformDownRampUp = true;
     }
+
+    protected abstract MovableState initMovableState();
 
     protected abstract VehicleMovementHelper initVehicleHelper();
 
@@ -82,9 +86,7 @@ public abstract class Truck implements Vehicle {
     }
 
     public void gas(double amount){
-        if(platformDownRampUp){
-            vehicleMovementHelper.gas(amount);
-        }
+        vehicleMovementHelper.gas(amount);
     }
 
     public void brake(double amount) {
@@ -103,9 +105,8 @@ public abstract class Truck implements Vehicle {
         vehicleMovementHelper.turnRight();
     }
 
-    protected MovableState state = new IsMovableState();
 
-    public void setMovableState(MovableState movableState){
-        state = movableState;
-    }
+//    public void setMovableState(MovableState movableState){
+//        state = movableState;
+//    }
 }

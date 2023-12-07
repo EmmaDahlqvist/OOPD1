@@ -12,6 +12,11 @@ public class Scania extends Truck implements SpeedFactorImplementor {
     }
 
     @Override
+    protected MovableState initMovableState() {
+        return new IsMovableState();
+    }
+
+    @Override
     protected VehicleMovementHelper initVehicleHelper() {
         return new VehicleMovementHelper(350, this);
     }
@@ -25,7 +30,7 @@ public class Scania extends Truck implements SpeedFactorImplementor {
             if (degree >= 0) {
                 platformDegree = Math.min(platformDegree + degree, 70);
             }
-            raisePlatformLowerRamp();
+            vehicleMovementHelper.state.changeState(this);
         }
     }
 
@@ -35,7 +40,7 @@ public class Scania extends Truck implements SpeedFactorImplementor {
                 platformDegree = Math.max(platformDegree - degree, 0);
             }
         }
-        lowerPlatformRaiseRamp();
+        vehicleMovementHelper.state.changeState(this);
     }
 
     @Override

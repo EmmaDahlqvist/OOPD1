@@ -11,6 +11,12 @@ public class VehicleMovementHelper {
     protected Direction direction;
 
     SpeedFactorImplementor vehicle;
+    MovableState state = new IsMovableState() {
+        @Override
+        public void incrementSpeed(double amount) {
+            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        }
+    };
 
     protected VehicleMovementHelper(double enginePower, SpeedFactorImplementor speedFactorImplementor) {
         this.enginePower = enginePower;
