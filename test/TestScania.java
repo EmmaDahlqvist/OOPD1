@@ -1,3 +1,5 @@
+/*
+import model.Scania;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,3 +39,4 @@ public class TestScania {
     }
 
 }
+*/

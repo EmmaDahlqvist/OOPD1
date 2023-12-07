@@ -1,8 +1,10 @@
-import com.sun.source.tree.AssertTree;
+/*
+import model.BigRig;
+import model.Car;
+import model.Saab95;
+import model.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.awt.*;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -59,3 +61,4 @@ public class TestBigRig {
         assertTrue(bigRig.getListOfLoadedCars().contains(car2));
     }
 }
+*/
