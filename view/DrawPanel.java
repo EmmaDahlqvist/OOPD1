@@ -10,15 +10,16 @@ import model.*;
 // This panel represent the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel implements MovementObserver {
-//    private HashMap<model.Vehicle, String> vehicles;
     private List<Vehicle> vehicles;
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, List<Vehicle> vehicles) {
-        this.vehicles = vehicles;
+    public DrawPanel(int x, int y, World world) {
+        this.vehicles = world.vehicles;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.pink);
+
+        world.addMovementObservers(this);
     }
 
 

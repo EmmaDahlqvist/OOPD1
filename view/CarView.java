@@ -1,7 +1,10 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionListener;
+
 import model.*;
 
 /**
@@ -16,31 +19,32 @@ public class CarView extends JFrame{
     private final int Y;
 
     private DrawPanel drawPanel;
-    public JPanel controlPanel = new JPanel();
-    public JPanel initCarPanel = new JPanel();
-    public JPanel gasPanel = new JPanel();
+    private JPanel controlPanel = new JPanel();
+    private JPanel initCarPanel = new JPanel();
+    private JPanel gasPanel = new JPanel();
     public JSpinner gasSpinner = new JSpinner();
-    public JLabel gasLabel = new JLabel("Amount of gas");
-    public JButton gasButton = new JButton("Gas");
-    public JButton brakeButton = new JButton("Brake");
-    public JButton turboOnButton = new JButton("Saab Turbo on");
-    public JButton turboOffButton = new JButton("Saab Turbo off");
-    public JButton liftBedButton = new JButton("Scania Lift Bed");
-    public JButton lowerBedButton = new JButton("Lower Lift Bed");
-    public JButton addCarButton = new JButton("Add car");
-    public JButton removeCarButton = new JButton("Remove Car");
+    private JLabel gasLabel = new JLabel("Amount of gas");
+    private JButton gasButton = new JButton("Gas");
+    private JButton brakeButton = new JButton("Brake");
+    private JButton turboOnButton = new JButton("Saab Turbo on");
+    private JButton turboOffButton = new JButton("Saab Turbo off");
+    private JButton liftBedButton = new JButton("Scania Lift Bed");
+    private JButton lowerBedButton = new JButton("Lower Lift Bed");
+    private JButton addCarButton = new JButton("Add car");
+    private JButton removeCarButton = new JButton("Remove Car");
 
-    public JButton startButton = new JButton("Start all cars");
-    public JButton stopButton = new JButton("Stop all cars");
+    private JButton startButton = new JButton("Start all cars");
+    private JButton stopButton = new JButton("Stop all cars");
 
     private World world;
 
+
     // Constructor
-    public CarView(String framename, DrawPanel drawPanel, World world){
+    public CarView(String framename, World world){
         this.world = world;
         this.X = world.width;
         this.Y = world.height;
-        this.drawPanel = drawPanel;
+        this.drawPanel = new DrawPanel(X, Y-240, world);
         initComponents(framename);
     }
 
@@ -53,7 +57,6 @@ public class CarView extends JFrame{
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
@@ -90,27 +93,6 @@ public class CarView extends JFrame{
         this.add(initCarPanel);
         initCarPanel.setBackground(Color.YELLOW);
 
-//        startButton.setBackground(Color.blue);
-//        startButton.setForeground(Color.green);
-//        startButton.setPreferredSize(new Dimension(X/5-15,100));
-//        this.add(startButton);
-//
-//
-//        stopButton.setBackground(Color.red);
-//        stopButton.setForeground(Color.black);
-//        stopButton.setPreferredSize(new Dimension(X/5-15,100));
-//        this.add(stopButton);
-//
-//        addCarButton.setBackground(Color.green);
-//        addCarButton.setForeground(Color.black);
-//        addCarButton.setPreferredSize(new Dimension(X/5-15,100));
-//        this.add(addCarButton);
-//
-//        removeCarButton.setBackground(Color.YELLOW);
-//        removeCarButton.setForeground(Color.black);
-//        removeCarButton.setPreferredSize(new Dimension(X/5-15,100));
-//        this.add(removeCarButton);
-
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
@@ -122,5 +104,53 @@ public class CarView extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void addActionListenerToGasButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, gasButton);
+    }
+
+    public void addActionListenerToBrakeButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, brakeButton);
+    }
+
+    public void addActionListenerToTurboOnButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, turboOnButton);
+    }
+
+    public void addActionListenerToTurboOffButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, turboOffButton);
+    }
+
+    public void addActionListenerToLiftBedButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, liftBedButton);
+    }
+
+    public void addActionListenerToLowerBedButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, lowerBedButton);
+    }
+
+    public void addActionListenerToAddCarButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, addCarButton);
+    }
+
+    public void addActionListenerToRemoveCarButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, removeCarButton);
+    }
+
+    public void addActionListenerToStartButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, startButton);
+    }
+
+    public void addActionListenerToStopButton(ActionListener actionListener){
+        addActionListenerToButton(actionListener, stopButton);
+    }
+
+    private void addActionListenerToButton(ActionListener actionListener, JButton button){
+        button.addActionListener(actionListener);
+    }
+
+    public void addChangeListenerToGasSpinner(ChangeListener changeListener) {
+        gasSpinner.addChangeListener(changeListener);
     }
 }

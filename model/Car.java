@@ -14,11 +14,6 @@ public abstract class Car implements Vehicle {
         stopEngine();
     }
 
-//    @Override
-//    public void setMovableState(MovableState state) {
-//
-//    }
-
     protected void changeToIsMovableState(){
         vehicleMovementHelper.changeToIsMovableState();
     }

@@ -28,7 +28,7 @@ public class CarController {
     }
 
     private void initButtonFunctions(){
-        carView.gasButton.addActionListener(new ActionListener() {
+        carView.addActionListenerToGasButton(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gas(world.gasAmount);
@@ -88,6 +88,18 @@ public class CarController {
             public void stateChanged(ChangeEvent e) {
                 world.gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
+        });
+
+        carView.addActionListenerToAddCarButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                world.addCarToWorld();
+            }
+        });
+
+        carView.addActionListenerToRemoveCarButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){ world.removeCarFromWorld(); }
         });
     }
 
