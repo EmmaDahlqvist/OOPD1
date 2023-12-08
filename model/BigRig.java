@@ -16,10 +16,10 @@ public class BigRig extends Truck implements SpeedFactorImplementor {
         loadHelper = new LoadHelper<>(capacity);
     }
 
-    @Override
-    protected MovableState initMovableState() {
-        return new IsMovableState(350, this);
-    }
+//    @Override
+//    protected MovableState initMovableState() {
+//        return new IsMovableState(350, this);
+//    }
 
     @Override
     protected VehicleMovementHelper initVehicleHelper() {
@@ -28,12 +28,12 @@ public class BigRig extends Truck implements SpeedFactorImplementor {
 
 
     protected void loadCar(Car car){
-        if(!getPlatformDownRampUp()) {
+        if(super.getMovableState() instanceof NotMovableState) {
             double xDistance = Math.abs(getX() - car.getX());
             double yDistance = Math.abs(getY() - car.getY());
             if(xDistance <= distanceFromBigRig && yDistance <= distanceFromBigRig) {
                 loadHelper.load(car);
-                car.loadStatus = true;
+                car.changeToNotMovableState();
                 double truckPosX = getX();
                 double truckPosY = getY();
                 car.setX(truckPosX);
@@ -43,9 +43,9 @@ public class BigRig extends Truck implements SpeedFactorImplementor {
     }
 
     protected void unloadCar(){
-        if(!getPlatformDownRampUp() && !loadHelper.getListOfLoadedCars().isEmpty()){
+        if(super.getMovableState() instanceof NotMovableState && !loadHelper.getListOfLoadedCars().isEmpty()){
             Car car = loadHelper.getListOfLoadedCars().get(loadHelper.getListOfLoadedCars().size() - 1);
-            car.loadStatus = false;
+            car.changeToIsMovableState();
             loadHelper.unload(car);
             car.setX(car.getX() + distanceFromBigRig);
             car.setY(car.getY() + distanceFromBigRig);

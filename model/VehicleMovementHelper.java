@@ -1,8 +1,5 @@
 package model;
 
-import model.Direction;
-import model.SpeedFactorImplementor;
-
 public class VehicleMovementHelper {
     private double enginePower; // model.Engine power of the car
     public double currentSpeed; // The current speed of the car
@@ -11,12 +8,15 @@ public class VehicleMovementHelper {
     protected Direction direction;
 
     SpeedFactorImplementor vehicle;
-    MovableState state = new IsMovableState() {
-        @Override
-        public void incrementSpeed(double amount) {
-            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
-        }
-    };
+
+    MovableState movableState;
+
+//    MovableState state = new IsMovableState() {
+//        @Override
+//        public void incrementSpeed(double amount) {
+//            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+//        }
+//    };
 
     protected VehicleMovementHelper(double enginePower, SpeedFactorImplementor speedFactorImplementor) {
         this.enginePower = enginePower;
@@ -25,8 +25,21 @@ public class VehicleMovementHelper {
         this.direction = Direction.EAST;
         this.vehicle = speedFactorImplementor;
 
+        this.movableState = new IsMovableState();
 
         stopEngine();
+    }
+
+    protected void changeToIsMovableState(){
+        this.movableState = new IsMovableState();
+    }
+
+    protected void changeToNotMovableState(){
+        this.movableState = new NotMovableState();
+    }
+
+    protected MovableState getMovableState(){
+        return this.movableState;
     }
 
     protected double getX() {
@@ -58,7 +71,7 @@ public class VehicleMovementHelper {
     }
 
     protected void startEngine(){
-        currentSpeed = 0.1;
+        currentSpeed = movableState.startEngine();
     }
 
     protected void stopEngine(){
@@ -70,8 +83,8 @@ public class VehicleMovementHelper {
     }
 
     public void move() {
-        currentX += currentSpeed*direction.x;
-        currentY += currentSpeed*direction.y;
+        currentX += currentSpeed*direction.x * movableState.movable();
+        currentY += currentSpeed*direction.y * movableState.movable();
     }
 
     public void turnLeft() {
@@ -83,7 +96,7 @@ public class VehicleMovementHelper {
     }
 
     public void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower) *  movableState.movable();
     }
 
     public void decrementSpeed(double amount){

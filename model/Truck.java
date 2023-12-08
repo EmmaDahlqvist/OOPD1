@@ -17,7 +17,7 @@ public abstract class Truck implements Vehicle {
         platformDownRampUp = true;
     }
 
-    protected abstract MovableState initMovableState();
+//    protected abstract MovableState initMovableState();
 
     protected abstract VehicleMovementHelper initVehicleHelper();
 
@@ -29,13 +29,28 @@ public abstract class Truck implements Vehicle {
         return platformDownRampUp;
     }
 
-    protected void raisePlatformLowerRamp() {
-        platformDownRampUp = false;
+
+
+    protected void changeToIsMovableState(){
+        vehicleMovementHelper.changeToIsMovableState();
+    }
+    protected void changeToNotMovableState(){
+        vehicleMovementHelper.changeToNotMovableState();
     }
 
-    protected void lowerPlatformRaiseRamp() {
-        platformDownRampUp = true;
+    protected MovableState getMovableState(){
+        return vehicleMovementHelper.getMovableState();
     }
+
+    /*protected void raisePlatformLowerRamp() {
+        changeToNotMovableState();
+        platformDownRampUp = false;
+    }*/
+
+    /*protected void lowerPlatformRaiseRamp() {
+        changeToIsMovableState();
+        platformDownRampUp = true;
+    }*/
 
     public double getX() {
         return vehicleMovementHelper.getX();

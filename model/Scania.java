@@ -11,10 +11,10 @@ public class Scania extends Truck implements SpeedFactorImplementor {
         platformDegree = 0;
     }
 
-    @Override
-    protected MovableState initMovableState() {
-        return new IsMovableState();
-    }
+//    @Override
+//    protected MovableState initMovableState() {
+//        return new IsMovableState();
+//    }
 
     @Override
     protected VehicleMovementHelper initVehicleHelper() {
@@ -30,7 +30,7 @@ public class Scania extends Truck implements SpeedFactorImplementor {
             if (degree >= 0) {
                 platformDegree = Math.min(platformDegree + degree, 70);
             }
-            vehicleMovementHelper.state.changeState(this);
+            platformRaised();
         }
     }
 
@@ -40,20 +40,20 @@ public class Scania extends Truck implements SpeedFactorImplementor {
                 platformDegree = Math.max(platformDegree - degree, 0);
             }
         }
-        vehicleMovementHelper.state.changeState(this);
+        platformDown();
     }
 
-    @Override
-    public void lowerPlatformRaiseRamp(){ //Sätter ett krav på att platformen måste vara nere när denna ska köras
+
+    public void platformDown(){ //Sätter ett krav på att platformen måste vara nere när denna ska köras
         if(platformDegree == 0){
-            super.lowerPlatformRaiseRamp();
+            super.changeToIsMovableState();
         }
     }
 
-    @Override
-    public void raisePlatformLowerRamp(){ //Sätter ett krav på att platforms vinkeln måste vara högre än 0
+
+    public void platformRaised(){ //Sätter ett krav på att platforms vinkeln måste vara högre än 0
         if(platformDegree > 0){
-            super.raisePlatformLowerRamp();
+            super.changeToNotMovableState();
         }
     }
 

@@ -16,12 +16,21 @@ public abstract class Car implements Vehicle {
         stopEngine();
     }
 
-    @Override
-    public void setMovableState(MovableState state) {
+//    @Override
+//    public void setMovableState(MovableState state) {
+//
+//    }
 
+    protected void changeToIsMovableState(){
+        vehicleMovementHelper.changeToIsMovableState();
+    }
+    protected void changeToNotMovableState(){
+        vehicleMovementHelper.changeToNotMovableState();
     }
 
-
+    protected MovableState getMovableState(){
+        return vehicleMovementHelper.getMovableState();
+    }
 
     protected abstract VehicleMovementHelper initVehicleHelper();
     public String getModelName() {
@@ -80,9 +89,9 @@ public abstract class Car implements Vehicle {
     }
 
     public void move() {
-        if(!loadStatus){
-            vehicleMovementHelper.move();
-        }
+//        if(!loadStatus){
+//        }
+        vehicleMovementHelper.move();
     }
 
     public void turnLeft() {

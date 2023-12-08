@@ -2,19 +2,23 @@ package model;
 
 public class NotMovableState implements MovableState{
 
-
-    public void gas(double amount){
-        //TOM
+    public double startEngine(){
+        return 0;
     }
 
-    @Override
-    public void incrementSpeed(double amount) {
-
+    public double movable() {
+        return 0;
     }
 
 
-    @Override
-    public void changeState(Vehicle vehicle) {
-        vehicle.setMovableState(new IsMovableState());
-    }
+//    @Override
+//    public void incrementSpeed(double amount) {
+//
+//    }
+
+
+//    @Override
+//    public void changeState(Vehicle vehicle) {
+//        vehicle.setMovableState(new IsMovableState());
+//    }
 }

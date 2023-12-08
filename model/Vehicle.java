@@ -19,7 +19,7 @@ public interface Vehicle extends Movable, Engine {
 
     String getModelName();
 
-    void setMovableState(MovableState state);
-
-    void incrementSpeed(double amount);
+//    void setMovableState(MovableState state);
+//
+//    void incrementSpeed(double amount);
 }

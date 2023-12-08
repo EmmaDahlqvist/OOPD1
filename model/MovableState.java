@@ -1,10 +1,11 @@
 package model;
 
 public interface MovableState {
-    void changeState(Vehicle vehicle);
+//    void changeState(Vehicle vehicle);
 
-    void gas(double amount);
+    double startEngine();
 
-    void incrementSpeed(Vehicle vehicle, double amount);
+    double movable();
+
 
 }

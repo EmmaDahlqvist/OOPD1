@@ -2,6 +2,20 @@ package model;
 
 public class IsMovableState implements MovableState {
 
+    public double startEngine(){
+        return 0.1;
+    }
+
+    public double movable() {
+        return 1;
+    }
+
+
+
+
+
+/*
+    }
     protected IsMovableState() {
 
     }
@@ -20,7 +34,7 @@ public class IsMovableState implements MovableState {
         if(amount >= 0 && amount <= 1){
             incrementSpeed(amount);
         }
-    }
+    }*/
 
 
 
