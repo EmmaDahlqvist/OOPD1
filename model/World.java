@@ -22,7 +22,7 @@ public class World {
 
     }
 
-    public void addCarToWorld(Vehicle vehicle, int x, int y){
+    public void addCar(Vehicle vehicle, int x, int y){
         vehicles.add(vehicle);
         vehicle.setY(y);
         vehicle.setX(x);

@@ -1,6 +1,7 @@
 package model;
 
 public class VehicleFactory {
+
     public static Vehicle createSaab95() {
         return new Saab95();
     }

@@ -7,8 +7,6 @@ public abstract class Car implements Vehicle {
     protected VehicleHelper vehicleHelper;
     protected VehicleMovementHelper vehicleMovementHelper;
 
-    public boolean loadStatus = false;
-
     protected Car(int nrDoors, Color color, String modelName) {
         vehicleMovementHelper = initVehicleHelper();
         vehicleHelper = new VehicleHelper(nrDoors, color, modelName);
@@ -89,8 +87,6 @@ public abstract class Car implements Vehicle {
     }
 
     public void move() {
-//        if(!loadStatus){
-//        }
         vehicleMovementHelper.move();
     }
 

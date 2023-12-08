@@ -35,56 +35,56 @@ public class CarController {
             }
         });
 
-        carView.brakeButton.addActionListener(new ActionListener() {
+        carView.addActionListenerToBrakeButton(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 brake(world.gasAmount);
             }
         });
 
-        carView.turboOnButton.addActionListener(new ActionListener() {
+        carView.addActionListenerToTurboOnButton(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setTurboOn();
             }
         });
 
-        carView.turboOffButton.addActionListener(new ActionListener() {
+        carView.addActionListenerToTurboOffButton(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setTurboOff();
             }
         });
 
-        carView.liftBedButton.addActionListener(new ActionListener() {
+        carView.addActionListenerToLiftBedButton(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 liftBed();
             }
         });
 
-        carView.lowerBedButton.addActionListener(new ActionListener() {
+        carView.addActionListenerToLowerBedButton(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 lowerBed();
             }
         });
 
-        carView.startButton.addActionListener(new ActionListener() {
+        carView.addActionListenerToStartButton(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startVehicle();
             }
         });
 
-        carView.stopButton.addActionListener(new ActionListener() {
+        carView.addActionListenerToStopButton(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 stopVehicle();
             }
         });
 
-        carView.gasSpinner.addChangeListener(new ChangeListener() {
+        carView.addChangeListenerToGasSpinner(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 world.gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }

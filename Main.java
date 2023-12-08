@@ -9,12 +9,9 @@ public class Main {
         CarView carView = new CarView("CarSim 2.0", drawPanel, world);
         CarController cc = new CarController(world, carView);
 
-        world.addCarToWorld(VehicleFactory.createVolvo240(),0, 0);
-        world.addCarToWorld(VehicleFactory.createScania(), 0, 100);
-        world.addCarToWorld(VehicleFactory.createSaab95(), 0, 200);
-
-        //lägg till observer som notifieras vid rörelseändringar
-        world.addMovementObservers(drawPanel);
+        world.addCar(VehicleFactory.createVolvo240(),0, 0);
+        world.addCar(VehicleFactory.createScania(), 0, 70);
+        world.addCar(VehicleFactory.createSaab95(), 0, 140);
 
         world.getTimer().start();
     }

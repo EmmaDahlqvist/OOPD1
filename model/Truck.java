@@ -14,7 +14,6 @@ public abstract class Truck implements Vehicle {
         vehicleMovementHelper = initVehicleHelper();
         vehicleHelper = new VehicleHelper(nrDoors, color, modelName);
 
-        platformDownRampUp = true;
     }
 
 //    protected abstract MovableState initMovableState();
